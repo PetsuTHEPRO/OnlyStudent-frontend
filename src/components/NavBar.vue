@@ -1,19 +1,50 @@
 <template>
-    <header class="d-flex align-items-center justify-content-between px-4 py-4 border-b border-purple-800">
-      <div class="text-2xl font-bold">Only Study</div>
-      <nav class="flex items-center space-x-6">
-        <a href="#" class="text-white">LOG IN</a>
-        <router-link to="login" class="px-4 py-2 font-semibold text-black bg-white rounded">CADASTRAR-SE</router-link>
+  <header class="d-flex align-items-center justify-content-between bg-black px-4 py-2 mb-5 mt-2 border-bottom border-top border-3 border-purple">
+    <router-link class="fw-bolder" style="color: white; text-decoration: none;" to="/">Only Study</router-link>
+    <div>
+      <nav class="d-flex align-items-center">
+        <router-link to="/login" class="login-link d-flex align-items-center me-4 text-decoration-none fw-bold">
+          <img class="me-1" src="../components/icons/Customer.png" alt="">
+          LOG IN
+        </router-link>
+        <router-link to="/register"
+          class="register-link px-4 py-2 fw-bolder text-white border border-purple rounded text-decoration-none"
+          @click="register"
+        >
+          CADASTRAR-SE
+        </router-link>
       </nav>
-    </header>
+    </div>
+  </header>
 </template>
 
-<script>
-</script>
+<script></script>
 
 <style scoped>
-
-nav{
-    width: 100%;
+nav {
+  width: 100%;
 }
+
+.border-purple{
+  border-color: #7D1479 !important;
+}
+
+.login-link {
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.login-link:hover {
+  color: #7D1479;
+}
+
+.register-link {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.register-link:hover {
+  background-color: #7D1479;
+  border-color: #fff;
+}
+
 </style>

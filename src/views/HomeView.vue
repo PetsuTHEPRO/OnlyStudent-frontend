@@ -4,7 +4,7 @@ import NavBar from '../components/NavBar.vue';
 
 <template>
   <main>
-    <div class="min-h-screen bg-[#1a001a] text-white">
+    <div class="min-h-screen text-white">
       <NavBar />
       <main class="flex flex-col items-center justify-center flex-1 p-4 text-center">
       <h1 class="text-4xl font-bold leading-snug md:text-6xl">
