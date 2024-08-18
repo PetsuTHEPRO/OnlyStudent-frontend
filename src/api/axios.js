@@ -1,8 +1,9 @@
 import axios from 'axios';
 import CookiesService from '@/api/CookiesService.js';
 
+const apiUrl = import.meta.env.VITE_API_URL;
 const apiClient = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: apiUrl,
   headers: {
     'Content-Type': 'application/json'
   }
@@ -30,6 +31,16 @@ export default {
       especialidade: userData.especialidade
     });
   },
+
+  updateUser(user) {
+    console.log(user.name + " - " + user.especialidade + " - " + user.telefone + " - " + user.login);
+    return apiClient.put(`/educator/updateProfile?login=${user.login}`, {
+      name: user.name,
+      telefone: user.telefone,
+      especialidade: user.especialidade
+    });
+  },
+
   loginUser(userData){
     return apiClient.post('/auth/login', {
       email: userData.email,
@@ -62,5 +73,22 @@ export default {
     return apiClient.get('/turma/turma', {
       params: { codigo: codigo, page: page, size: size } // Parâmetro de consulta
     });
+  },
+
+  getClassroomById(id){
+    return apiClient.get(`/turma/${id}`);
+  },
+
+  getMaterialsByClassroomCode(codigo) {
+    return apiClient.get(`/turma/${codigo}/materials`);
+  },
+
+  setMaterialsByClassroomCode(materials) {
+    return apiClient.post(`/material/register`, materials);
+  },
+
+  sendEmail(support) {
+    return apiClient.post(`/support/send`, support);
   }
+
 }

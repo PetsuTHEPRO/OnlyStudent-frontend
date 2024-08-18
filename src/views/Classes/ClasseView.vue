@@ -1,17 +1,17 @@
 <script setup>
+import ClassroomDetails from "../../components/ClassroomDetails.vue";
 import MenuBar from "../../components/MenuBar.vue";
 import SideBar from "../../components/SideBar.vue";
-import Classes from "../../components/Classes.vue";
 </script>
 
 <template>
-  <div class="row bg-classroom min-vh-100 bg-educator">
+  <div class="row bg-educator min-vh-100">
     <div class="col-md-2 bg-purple">
       <SideBar />
     </div>
     <div class="col-md-10 ps-0">
       <MenuBar role="Educador" />
-      <Classes />
+      <ClassroomDetails />
     </div>
   </div>
 </template>

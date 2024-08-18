@@ -4,7 +4,7 @@ import SideBar from "../../components/SideBar.vue";
 </script>
 
 <template>
-  <div class="row bg-classroom min-vh-100">
+  <div class="row bg-classroom min-vh-100 bg-educator">
     <div class="col-md-2 bg-purple">
       <SideBar />
     </div>
@@ -104,17 +104,7 @@ export default {
 </script>
 
 <style>
-button {
-  background-color: #4f0f4c;
-  border-radius: 12px;
-  border: none;
-  color: white;
-  font-weight: bolder;
-}
-
-button:hover {
-  background-color: #9747ff;
-}
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap");
 
 .rounded {
   border-radius: 10px !important;
@@ -138,4 +128,19 @@ textarea {
   background-color: #121214;
   color: white;
 }
+
+
+body {
+  margin: 0;
+}
+h1,
+h2,
+h5 {
+  color: white;
+}
+
+.bg-educator{
+  background-color: #121214 !important;
+}
+
 </style>

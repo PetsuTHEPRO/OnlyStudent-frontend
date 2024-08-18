@@ -10,14 +10,13 @@ import CardClass from "../../components/CardClass.vue";
       <div class="col-md-2 bg-purple">
         <SideBar />
       </div>
-      <div class="col-md-10 ps-0">
+      <div class="col-md-10 ps-0 d-flex flex-column">
         <MenuBar role="Educador" />
         <main class="flex-grow-1 p-4">
           <header
             class="d-flex align-items-center justify-content-between mb-4"
           >
             <h1 class="h3 fw-bold">Olá, {{ educator }}</h1>
-            <button @click="createClassroom" class="btn btn-success">Criar nova turma</button>
           </header>
           <section>
             <h2 class="h4 fw-semibold mb-3">Suas turmas</h2>
@@ -33,7 +32,7 @@ import CardClass from "../../components/CardClass.vue";
           </section>
         </main>
 
-        <footer class="bg-black text-center py-2 text-white">
+        <footer class="footer bg-black text-center py-2 text-white">
           <p class="mb-0">&copy; 2024 Institucional. All rights reserved.</p>
         </footer>
       </div>
@@ -74,9 +73,6 @@ export default {
     getStatusClass(status) {
       return `bg-${status.toLowerCase()}`;
     },
-    createClassroom() {
-      this.$router.push({ name: "createClassroom" });
-    },
   },
 };
 </script>
@@ -96,4 +92,5 @@ h5 {
 .bg-educator{
   background-color: #121214 !important;
 }
+
 </style>

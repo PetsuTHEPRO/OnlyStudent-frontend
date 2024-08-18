@@ -1,10 +1,9 @@
 <template>
   <header
-    class="d-flex align-items-center justify-content-between bg-black px-4 py-2 mb-5 mt-2 border-bottom border-top border-3 border-purple"
+    class="d-flex align-items-center justify-content-between bg-black px-4 py-2 mb-5 mt-2 border-bottom border-top border-2 border-purple"
   >
     <div class="d-flex align-items-center">
-      <LogInIcon class="me-2" width="32" height="32" />
-      <span class="h4 fw-bold mb-0">Institucional</span>
+      <span class="h4 fw-bold mb-0 text-white">Institucional</span>
       <div
         class="ms-3 px-3 py-1 rounded-pill bg-success text-white text-xs fw-medium"
       >
@@ -31,7 +30,10 @@
         ></button>
       </div>
 
-      <button class="bi bi-bell-fill p-2 text-white mx-4"></button>
+      <span class="bg-warning text-black px-2 py-1 rounded-pill">
+        R$ {{ saldo }}
+      </span>
+      <button class="bi bi-bell-fill rounded-circle mx-4 text-white notificati"></button>
       <button class="btn btn-outline-light rounded-circle p-0">
         <img
           width="40"
@@ -50,6 +52,11 @@ export default {
   name: "MenuBar",
   props: {
     role: String,
+  },
+  data() {
+    return {
+      saldo: 0,
+    };
   },
 };
 </script>
@@ -83,4 +90,11 @@ export default {
 input[text] {
   border-radius: 25px !important;
 }
+
+.notificati{
+  padding: 6px 9px;
+  border: none;
+  background-color: #7d1479;
+}
+
 </style>

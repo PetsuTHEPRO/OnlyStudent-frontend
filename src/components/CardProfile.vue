@@ -3,7 +3,6 @@
     <div class="mb-4">
       <div class="d-flex align-items-center justify-content-between">
         <h1 class="h2 fw-bold">Profile</h1>
-        <button class="btn btn-secondary" @click="toggleEdit">Edit Profile</button>
       </div>
 
       <div class="card">
@@ -24,8 +23,8 @@
               />
             </div>
             <div>
-              <h3 class="h5 fw-semibold">{{ user.name }}</h3>
-              <p class="text-muted">{{ user.login }}</p>
+              <h3 class="h5 fw-semibold text-white">{{ user.name }}</h3>
+              <p class="text-white">{{ user.login }}</p>
             </div>
           </div>
         </div>
@@ -37,6 +36,16 @@
               class="form-control"
               id="name"
               v-model="user.name"
+              :disabled="!isEditing"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="telephone" class="form-label">Telefone</label>
+            <input
+              type="text"
+              class="form-control"
+              id="telephone"
+              v-model="user.telefone"
               :disabled="!isEditing"
             />
           </div>
@@ -62,18 +71,33 @@
           </div>
           <div class="mb-3" v-if="role === 'educator'">
             <label for="specialty" class="form-label">Especialidade</label>
-            <input
-              type="text"
-              class="form-control"
-              id="specialty"
+            <select
+              id="especialidade"
+              class="d-block w-100 px-3 py-2 border border-2 rounded input-campo"
               v-model="user.especialidade"
               :disabled="!isEditing"
-            />
+            >
+              <option disabled value="">Selecione sua especialidade</option>
+              <option value="Doutorado">Doutorado</option>
+              <option value="Mestrado">Mestrado</option>
+              <option value="Especialização">Especialização</option>
+              <option value="Graduação">Graduação</option>
+              <!-- Adicione mais opções conforme necessário -->
+            </select>
           </div>
         </div>
         <div class="card-footer text-end">
-          <button class="btn btn-primary" @click="saveChanges" :disabled="!isEditing">
+          <button
+            class="btn btn-primary me-3"
+            @click="updateUser"
+            :disabled="!isEditing"
+          >
             Save Changes
+          </button>
+          <button class="btn btn-secondary" 
+          @click="toggleEdit" 
+          :disabled="isEditing">
+            Edit Profile
           </button>
         </div>
       </div>
@@ -82,6 +106,7 @@
 </template>
 
 <script>
+import notificationService from "@/api/notificationService.js";
 import CookiesService from "@/api/CookiesService.js";
 import axios from "@/api/axios.js";
 
@@ -102,18 +127,92 @@ export default {
   },
   methods: {
     toggleEdit() {
-      this.isEditing = !this.isEditing;
-      if (!this.isEditing) {
-        // Salvar as mudanças quando sair do modo de edição
-        this.saveChanges();
+      this.isEditing = true;
+    },
+
+    validateName() {
+      const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/; // Aceita letras com acentos e espaços
+      if (!this.user.name) {
+        notificationService.error("Preencha o campo nome.");
+        return -1;
+      } else if (!nameRegex.test(this.user.name)) {
+        notificationService.error("Campo nome deve conter apenas letras.");
+        return -1;
       }
     },
-    saveChanges() {
-      // Aqui você pode adicionar a lógica para salvar as alterações, como uma chamada de API
-      console.log("Profile saved", this.profile);
+    validateTelephone() {
+      const phoneRegex = /^\d{10,11}$/;
+      if (!this.user.telefone) {
+        notificationService.error("Preencha o campo telefone.");
+        return -1;
+      } else if (!phoneRegex.test(this.user.telefone)) {
+        notificationService.error("Telefone deve ter 10 ou 11 dígitos.");
+        return -1;
+      }
+    },
+
+    validateEspecialidade() {
+      if (!this.user.especialidade && this.role === "EDUCATOR") {
+        notificationService.error("Especialidade é obrigatória.");
+        return -1;
+      }
+    },
+
+    updateUser() {
+      if (this.validateName() == -1) return;
+      if (this.validateTelephone() == -1) return;
+      if (this.validateEspecialidade() == -1) return;
+
+      // Make a request to the backend API to verify the login credentials
+      axios
+        .updateUser(this.user)
+        .then(() => {
+          // Handle successful update response
+          notificationService.success(
+            "Dados do usuário atualizados com sucesso!"
+          );
+        })
+        .catch((error) => {
+          if (error.response) {
+            // O servidor respondeu com um status fora do intervalo 2xx
+            notificationService.error(error.response.data);
+          } else {
+            notificationService.error(
+              "Servidor Offline, entre em contato com a equipe técnica!"
+            );
+            console.log(error);
+          }
+        });
+
+        this.isEditing = false;
     },
   },
 };
 </script>
 
-<style></style>
+<style>
+.card{
+  background-color: #1A1A1E;
+  color: white;
+  border: 1px solid #7D1479;
+}
+
+.card-header{
+  border-bottom: 1px solid #7D1479;
+}
+
+.card-footer{
+  border-top: 1px solid #7D1479;
+}
+
+.form-control, select {
+  background-color: #323232 !important;
+  border: 2px solid #DEE2E6 !important;
+  color: white !important;
+}
+
+.form-control:disabled, select:disabled {
+  color: #808080 !important;
+}
+
+</style>

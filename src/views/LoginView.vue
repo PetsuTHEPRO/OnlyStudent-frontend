@@ -19,10 +19,6 @@ import CardLogin from "../components/CardLogin.vue";
   </div>
 </template>
 
-<script>
-
-</script>
-
 <style>
 
 </style>

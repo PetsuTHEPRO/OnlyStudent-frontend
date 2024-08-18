@@ -123,8 +123,8 @@
 </template>
 
 <script>
-import axios from "../api/axios.js";
-import notificationService from '../api/notificationService.js'
+import axios from "@/api/axios.js";
+import notificationService from '@/api/notificationService.js'
 
 export default {
   data() {
@@ -144,39 +144,39 @@ export default {
 
     validateName() {
       const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/; // Aceita letras com acentos e espaços
-      if (!this.name) {
+      if (!this.user.name) {
         notificationService.error('Preencha o campo nome.');
         return -1;
-      }else if(!nameRegex.test(this.name)){
+      }else if(!nameRegex.test(this.user.name)){
         notificationService.error('Campo nome deve conter apenas letras.');
         return -1;
       }
     },
     validateTelephone() {
       const phoneRegex = /^\d{10,11}$/;
-      if (!this.telephone) {
+      if (!this.user.telephone) {
         notificationService.error('Preencha o campo telefone.');
         return -1;
-      } else if (!phoneRegex.test(this.telephone)) {
+      } else if (!phoneRegex.test(this.user.telephone)) {
         notificationService.error('Telefone deve ter 10 ou 11 dígitos.');
         return -1;
       }
     },
     validateEmail() {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!this.email) {
+      if (!this.user.email) {
         notificationService.error('Preencha o campo email.');
         return -1;
-      } else if (!emailRegex.test(this.email)) {
+      } else if (!emailRegex.test(this.user.email)) {
         notificationService.error('Email invalido.');
         return -1;
       }
     },
     validatePassword() {
-      if (!this.password) {
+      if (!this.user.password) {
         notificationService.error('Preencha o campo senha.');
         return -1;
-      } else if (this.password.length < 6) {
+      } else if (this.user.password.length < 6) {
         notificationService.error('Senha deve ter no mínimo 6 caracteres.');
         return -1;
       }
@@ -185,14 +185,14 @@ export default {
       if (!this.passwordConfirmation) {
         notificationService.error('Confirmação de senha é obrigatória.');
         return -1;
-      } else if (this.passwordConfirmation !== this.password) {
+      } else if (this.passwordConfirmation !== this.user.password) {
         notificationService.error('As senhas não coincidem.');
         return -1;
       }
     },
 
     validateEspecialidade() {
-      if (!this.especialidade && this.role === "EDUCATOR") {
+      if (!this.user.especialidade && this.user.role === "EDUCATOR") {
         notificationService.error('Especialidade é obrigatória.');
         return -1;
       }

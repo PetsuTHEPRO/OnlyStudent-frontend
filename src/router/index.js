@@ -97,6 +97,30 @@ const router = createRouter({
         requiresAuth: true,
         role: "educator",
       },
+    },
+    {
+      path: "/educator/support",
+      name: "support",
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("../views/Educator/SupportView.vue"),
+      meta: {
+        requiresAuth: true,
+        role: "educator",
+      },
+    },
+    {
+      path: "/educator/classroom/:id",
+      name: "classroom",
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("../views/Classes/ClasseView.vue"),
+      meta: {
+        requiresAuth: true,
+        role: "educator",
+      },
     }
   ],
 });

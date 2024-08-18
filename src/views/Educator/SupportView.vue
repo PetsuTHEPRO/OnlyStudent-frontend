@@ -1,21 +1,21 @@
 <script setup>
-import CardProfile from "../../components/CardProfile.vue";
 import MenuBar from "../../components/MenuBar.vue";
 import SideBar from "../../components/SideBar.vue";
+import CardSuport from "../../components/CardSuport.vue";
 </script>
 
 <template>
-  <div class="d-flex flex-column bg-educator text-white">
-    <div class="row min-vh-100">
+      <div class="d-flex flex-column bg-educator text-white">
+    <div class="row  min-vh-100">
       <div class="col-md-2 bg-purple">
         <SideBar />
       </div>
-      <div class="col-md-10 p-0 m-0">
-        <MenuBar role="Educador" /> 
-          <header
-            class="d-flex align-items-center justify-content-between"
-          ></header>
-          <CardProfile />
+      <div class="col-md-10 ps-0 d-flex flex-column">
+        <MenuBar role="Educador" />
+        <CardSuport />
+        <footer class="footer bg-black text-center py-2 text-white">
+          <p class="mb-0">&copy; 2024 Institucional. All rights reserved.</p>
+        </footer>
       </div>
     </div>
   </div>

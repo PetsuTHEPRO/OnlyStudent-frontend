@@ -10,6 +10,7 @@
             <router-link
               :to="`/${role}`"
               class="d-flex align-items-center text-white text-decoration-none mb-3"
+              active-class="router-link-active"
             >
               <i class="bi bi-house-door-fill me-2"></i>
               Home
@@ -19,6 +20,7 @@
             <router-link
               :to="`/${role}/profile`"
               class="d-flex align-items-center text-white text-decoration-none mb-3"
+              active-class="router-link-active"
             >
               <i class="bi bi-person-fill me-2"></i>
               Profile
@@ -28,6 +30,7 @@
             <router-link
               :to="`/${role}/classes/`"
               class="d-flex align-items-center text-white text-decoration-none mb-3"
+              active-class="router-link-active"
             >
               <i class="bi bi-book-fill me-2"></i>
               My Classes
@@ -35,8 +38,9 @@
           </li>
           <li>
             <router-link
-              to="/support"
+              :to="`/${role}/support/`"
               class="d-flex align-items-center text-white text-decoration-none mb-3"
+              active-class="router-link-active"
             >
               <i class="bi bi-question-circle-fill me-2"></i>
               Support
@@ -81,11 +85,20 @@ export default {
 
 <style>
 .bg-purple {
-  background-color: #1a001a;
+  background-color: #131212;
+  border-right: 2px solid #424141;
 }
 
 .sidebar {
   position: fixed;
   height: 100vh;
 }
+
+.router-link-active {
+  background-color: #7F5AF0; /* Cor de fundo para o link ativo */
+  border-radius: 0.25rem;    /* Bordas arredondadas */
+  padding: 0.3rem 0.5rem;     /* Espacamento interno do link */
+  color: white;             /* Cor do texto do link */
+}
+
 </style>

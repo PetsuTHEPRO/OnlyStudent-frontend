@@ -16,10 +16,9 @@
       <p class="card-text text-white">Alunos: {{ classroom.alunos.length }}</p>
     </div>
     <div class="card-footer d-flex justify-content-between">
-      <button class="btn btn-outline-light rounded-circle">
+      <router-link :to="{ name: 'classroom', params: { id: classroom.codigo } }" class="btn btn-outline-light rounded-circle">
         <i class="bi bi-pencil" style="font-size: 1.2rem"></i>
-        <span class="visually-hidden">Editar turma</span>
-      </button>
+      </router-link>
       <button class="btn btn-outline-light rounded-circle">
         <i class="bi bi-gear" style="font-size: 1.2rem"></i>
         <span class="visually-hidden">Configurações</span>
