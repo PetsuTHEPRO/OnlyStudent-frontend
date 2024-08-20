@@ -99,15 +99,15 @@ export default {
           const { token, email, role, name, id } = response.data;
           
           this.login({ token: token, email: email, role: role, name: name, id: id });
-          notificationService.success("Bem vindo de volta!");
+          notificationService.success("Bem vindo!");
           this.$router.push({ name: role === "student" ? "student" : "educator" });
         })
         .catch((error) => {
           // Handle login error response
-          if (error.response.data) {
+          if (error) {
             // O servidor respondeu com um status fora do intervalo 2xx
-            notificationService.error(error.response.data);
-            console.log(error.response.data);
+            notificationService.error(error);
+            console.log(error);
           }else{ 
             notificationService.error("Servidor Offline, entre em contato a equipe técnica!");
           }
