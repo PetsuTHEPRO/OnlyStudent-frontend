@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import store from "../store/index.js";
+import NotFound from '../views/NotFound.vue'; 
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -158,7 +159,12 @@ const router = createRouter({
         requiresAuth: true,
         role: "student",
       },
-    }
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: NotFound
+    },
   ],
 });
 
