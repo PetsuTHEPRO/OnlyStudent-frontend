@@ -21,6 +21,16 @@ export default {
       }
     });
   },
+
+  getClassroomsTurmaAluno(codigo){
+    const token = CookiesService.getToken();
+    return apiClient.get('/turma/turmasAluno', {
+      params: { codigo: codigo }, // Parâmetro de consulta
+      headers: {
+        Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
+      }
+    });
+  },
   registerUser(userData){
     return apiClient.post('/auth/register', {
       name: userData.name,
@@ -32,9 +42,10 @@ export default {
     });
   },
 
-  updateUser(user) {
+  updateUser(user, role) {
+    role = role.toLowerCase();
     console.log(user.name + " - " + user.especialidade + " - " + user.telefone + " - " + user.login);
-    return apiClient.put(`/educator/updateProfile?login=${user.login}`, {
+    return apiClient.put(`/${role}/updateProfile?login=${user.login}`, {
       name: user.name,
       telefone: user.telefone,
       especialidade: user.especialidade
@@ -53,7 +64,10 @@ export default {
       params: { email: email } // Parâmetro de consulta
     });
   },
-
+  deleteClassroom(codigo){
+    return apiClient.delete(`/turma/${codigo}`);
+  },
+  
   createClassroom(classroomData){
     return apiClient.post('/turma/register', {
       name: classroomData.name,
@@ -69,8 +83,12 @@ export default {
     });
   },
 
-  getClassroomsById(codigo, page, size){
-    return apiClient.get('/turma/turma', {
+  getIdsAlunos(codigo){
+    return apiClient.get(`/turma/${codigo}/students/info`);
+  },
+
+  getClassroomsByIdOfEducator(codigo, page, size){
+    return apiClient.get('/turma/turmaEducator', {
       params: { codigo: codigo, page: page, size: size } // Parâmetro de consulta
     });
   },

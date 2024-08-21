@@ -7,9 +7,20 @@ const store = createStore({
     userRole: Cookies.getRole() || '',
     email: Cookies.getEmail() || '',
     name: Cookies.getName() || '',
-    id: Cookies.getId() || ''
+    id: Cookies.getId() || '',
+    isMenuOpen: false,
   },
   mutations: {
+
+    TOGGLE_MENU(state) {
+      state.isOpen = !state.isOpen;
+    },
+    OPEN_MENU(state) {
+      state.isOpen = true;
+    },
+    CLOSE_MENU(state) {
+      state.isOpen = false;
+    },
     setAuthToken(state, token) {
       state.authToken = token
       Cookies.setToken(token)
@@ -49,14 +60,24 @@ const store = createStore({
     },
     logout({ commit }) {
       commit('clearAll')
-    }
+    },
+    toggleMenu({ commit }) {
+      commit('TOGGLE_MENU');
+    },
+    openMenu({ commit }) {
+      commit('OPEN_MENU');
+    },
+    closeMenu({ commit }) {
+      commit('CLOSE_MENU');
+    },
   },
   getters: {
     isAuthenticated: state => !!state.authToken,
     userRole: state => state.userRole,
     email: state => state.email,
     name: state => state.name,
-    id: state => state.id
+    id: state => state.id,
+    isMenuOpen: state => state.isOpen,
   }
 })
 

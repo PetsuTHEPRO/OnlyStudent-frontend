@@ -11,7 +11,7 @@ import SideBar from "../../components/SideBar.vue";
         <SideBar />
       </div>
       <div class="col-md-10 p-0 m-0">
-        <MenuBar role="Educador" /> 
+        <MenuBar role="Professor" /> 
           <header
             class="d-flex align-items-center justify-content-between"
           ></header>
@@ -35,6 +35,11 @@ h5 {
 
 .bg-educator{
   background-color: #121214 !important;
+}
+
+.bg-purple {
+  background-color: #131212 !important;
+  border-right: 2px solid #424141 !important;
 }
 
 </style>

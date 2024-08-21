@@ -11,7 +11,7 @@ import CardSuport from "../../components/CardSuport.vue";
         <SideBar />
       </div>
       <div class="col-md-10 ps-0 d-flex flex-column">
-        <MenuBar role="Professor" />
+        <MenuBar role="Estudante" />
         <CardSuport />
         <footer class="footer bg-black text-center py-2 text-white">
           <p class="mb-0">&copy; 2024 Institucional. All rights reserved.</p>

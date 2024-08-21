@@ -9,7 +9,7 @@ import SideBar from "../../components/SideBar.vue";
       <SideBar />
     </div>
     <div class="col-md-10 ps-0">
-      <MenuBar role="Educador" />
+      <MenuBar role="Professor" />
       <div class="mx-5 d-flex flex-column align-items-center">
         <h1>Cadastrar Turma</h1>
         <p>Crie uma nova turma</p>
@@ -115,8 +115,10 @@ export default {
 }
 
 .bg-purple {
-  background-color: #1a001a;
+  background-color: #131212 !important;
+  border-right: 2px solid #424141 !important;
 }
+
 
 input,
 textarea {

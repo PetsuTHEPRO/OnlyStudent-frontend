@@ -8,7 +8,7 @@ import CardClass from "@/components/CardClass.vue";
     <div class="mb-4 d-flex align-items-center justify-content-between">
       <h1 class="h3">Classes</h1>
       
-      <button @click="createClassroom" class="btn btn-solicitar text-white">Cadastrar turma</button>
+      <button v-if="cookieService.getRole() === 'educator'" @click="createClassroom" class="btn btn-solicitar text-white">Cadastrar turma</button>
     </div>
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
@@ -18,7 +18,7 @@ import CardClass from "@/components/CardClass.vue";
           v-for="classroom in classrooms"
           :key="classroom.codigo"
         >
-        <CardClass :classroom="classroom" :statusColor="getStatusClass(classroom.status)"/>
+        <CardClass :classroom="classroom" :student="studentAtual" :statusColor="getStatusClass(classroom.status)"/>
         </div>
       <!-- Repeat above block for each item -->
     </div>
@@ -52,11 +52,12 @@ import cookieService from "@/api/CookiesService.js";
 export default {
   data() {
     return {
-      educator: cookieService.getName(),
+      student: cookieService.getName(),
       showModal: false,
       statusColor: "",
+      studentAtual: [],
       classrooms: [],
-      id_educator: cookieService.getId(),
+      id_student: cookieService.getId(),
       currentPage: 0,
       totalPages: 1,
       pageSize: 12,
@@ -64,27 +65,24 @@ export default {
   },
   created() {},
   mounted() {
-    this.getClassroomsById(this.id_educator, this.currentPage, this.pageSize);
+    this.getClassroomsById(this.id_student);
   },
   methods: {
     getStatusClass(status) {
       return `bg-${status.toLowerCase()}`;
     },
     handlePageChange(page) {
-      this.getClassroomsById(this.id_educator, page - 1, this.pageSize); // Spring Boot pagination is 0-based
+      this.getClassroomsById(this.id_student, page - 1, this.pageSize); // Spring Boot pagination is 0-based
     },
 
-    createClassroom() {
-      this.$router.push({ name: "createClassroom" });
-    },
-
-    getClassroomsById(codigo, page, size) {
+    getClassroomsById(codigo) {
       axios
-      .getClassroomsByIdOfEducator(codigo, page, size)
+      .getUser(codigo, "student")
       .then((response) => {
-        this.classrooms = response.data.content;
-        this.currentPage = response.data.number;
-        this.totalPages = response.data.totalPages;
+          this.studentAtual = response.data;
+          console.log(response.data.classroom);
+          console.log(this.studentAtual.classroom);
+        this.classrooms = this.studentAtual.classroom;
       })
       .catch((error) => {
         console.log(error);

@@ -1,18 +1,13 @@
 <template>
-
-  <main
-    class="d-flex align-items-center justify-content-center p-4 text-center card-login"
-  >
+  <main class="d-flex align-items-center justify-content-center p-3 text-center card-login">
     <div class="mw-md w-100">
       <h2 class="fs-5 font-bold">
         Faça login para continuar sua jornada de aprendizado
       </h2>
       <form @submit.prevent="entrar">
         <div class="mt-4">
-          <div>
-            <label for="login" class="d-block fw-medium fs-sm text-white"
-              >Insira seu e-mail</label
-            >
+          <div class="mb-3">
+            <label for="email" class="d-block fw-medium fs-sm text-white">Insira seu e-mail</label>
             <div class="mt-1">
               <input
                 id="email"
@@ -20,14 +15,12 @@
                 placeholder="E-mail"
                 type="email"
                 required
-                class="d-block w-100 px-3 py-2 border border-2 rounded shadow-sm focus:shadow-md focus:border-purple-500 sm:text-sm text-white"
+                class="form-control px-3 py-2 border-2 rounded shadow-sm text-white bg-dark"
               />
             </div>
           </div>
-          <div>
-            <label for="password" class="d-block text-white fw-medium fs-sm mt-3"
-              >Insira sua senha</label
-            >
+          <div class="mb-3">
+            <label for="password" class="d-block text-white fw-medium fs-sm">Insira sua senha</label>
             <div class="mt-1">
               <input
                 id="password"
@@ -36,34 +29,28 @@
                 placeholder="Senha"
                 autocomplete="current-password"
                 required
-                class="d-block w-100 px-3 py-2 border border-2 rounded shadow-sm focus:shadow-md focus:border-purple-500 sm:text-sm text-white"
+                class="form-control px-3 py-2 border-2 rounded shadow-sm text-white bg-dark"
               />
             </div>
           </div>
         </div>
-        <div class="d-flex align-items-center justify-content-between mt-4">
-          <div class="d-flex align-items-center border border-1 rounded p-2">
-            <label for="remember-me" class="d-block mx-2 text-sm"
-              >Salvar senha</label
-            >
+        <div class="d-flex align-items-center justify-content-between mt-3">
+          <div class="d-flex align-items-center border rounded p-2">
+            <label for="remember-me" class="mx-2 text-sm text-white">Salvar senha</label>
             <input id="remember-me" v-model="rememberMe" type="checkbox" />
           </div>
           <div class="text-sm">
-            <router-link
-              to="#"
-              class="font-medium text-purple text-decoration-none fw-bolder"
-              >Forgot your password?</router-link
-            >
+            <router-link to="#" class="font-medium text-purple text-decoration-none fw-bolder">Esqueceu sua senha?</router-link>
           </div>
         </div>
-        <div class="d-flex align-items-center justify-content-center mb-4">
+        <div class="d-flex align-items-center justify-content-center mt-4 mb-4">
           <button
-          type="submit"
-          class="d-flex justify-content-center px-4 py-2 mt-3 text-sm font-medium text-white rounded-md shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+            type="submit"
+            class="btn btn-primary w-100 px-4 py-2 mt-3 text-sm font-medium text-white rounded shadow-sm"
           >
-          CONFIRMAR
-        </button>
-      </div>
+            CONFIRMAR
+          </button>
+        </div>
         <div class="d-flex align-items-center">
           <hr class="flex-grow-1 border border-white" />
           <div class="text-white mx-4">Outras opções de login</div>
@@ -106,7 +93,7 @@ export default {
           // Handle login error response
           if (error) {
             // O servidor respondeu com um status fora do intervalo 2xx
-            notificationService.error(error);
+            notificationService.error(error.response.data);
             console.log(error);
           }else{ 
             notificationService.error("Servidor Offline, entre em contato a equipe técnica!");
@@ -117,8 +104,53 @@ export default {
 };
 </script>
 
+
 <style>
-button {
+
+.card-login {
+  border: 2px solid;
+  border-image: linear-gradient(
+      to right,
+      rgba(255, 0, 0, 1) 0%,
+      rgba(255, 165, 0, 1) 20%,
+      rgba(255, 255, 0, 1) 40%,
+      rgba(0, 128, 0, 1) 60%,
+      rgba(0, 0, 255, 1) 80%,
+      rgba(75, 0, 130, 1) 100%
+    )
+    1;
+  border-radius: 25px;
+  background-color: #000;
+  max-width: 500px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .card-login {
+    padding: 1rem;
+    border-radius: 15px;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 0.75rem;
+  }
+
+  .form-control {
+    font-size: 0.875rem;
+    padding: 0.5rem;
+  }
+
+  label {
+    font-size: 0.875rem;
+  }
+}
+
+.btn-primary {
   background-color: #4f0f4c;
   border-radius: 12px;
   border: none;
@@ -126,7 +158,7 @@ button {
   font-weight: bolder;
 }
 
-button:hover {
+.btn-primary:hover {
   background-color: #9747ff;
 }
 
@@ -156,22 +188,6 @@ input[type="checkbox"] {
 
 .text-purple:hover{
   color: #8850F7;
-}
-
-.card-login {
-  border: 2px solid;
-  border-image: linear-gradient(
-      to right,
-      rgba(255, 0, 0, 1) 0%,
-      rgba(255, 165, 0, 1) 20%,
-      rgba(255, 255, 0, 1) 40%,
-      rgba(0, 128, 0, 1) 60%,
-      rgba(0, 0, 255, 1) 80%,
-      rgba(75, 0, 130, 1) 100%
-    )
-    1;
-  border-radius: 25px;
-  background-color: #000;
 }
 
 input {

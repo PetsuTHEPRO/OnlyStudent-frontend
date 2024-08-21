@@ -8,5 +8,11 @@ export default {
   },
   error(message) {
     toast.error(message, 3000)
+  },
+  warning(message) {
+    toast.warning(message, 3000)
+  },
+  info(message) {
+    toast.info(message, 3000)
   }
 }

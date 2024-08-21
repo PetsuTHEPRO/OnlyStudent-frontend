@@ -53,13 +53,13 @@ import MaterialIcon from "../components/MaterialIcon.vue";
           <h3 class="h6 fw-semibold text-white">Students</h3>
           <ul class="list-unstyled">
             <!-- Verifica se a lista de alunos está vazia -->
-            <template v-if="students.length === 0">
+            <template v-if="classroom.totalAlunos === 0">
               <li class="text-muted text-white">No students available</li>
             </template>
             <!-- Lista os alunos se existirem -->
             <template v-else>
               <li
-                v-for="aluno in classroom.alunos"
+                v-for="aluno in students"
                 :key="aluno.id"
                 class="d-flex align-items-center mb-2 text-white"
               >
@@ -90,7 +90,7 @@ import MaterialIcon from "../components/MaterialIcon.vue";
           </div>
           <ul class="list-unstyled">
             <!-- Verifica se a lista de materiais está vazia -->
-            <template v-if="materials.length === 0">
+            <template v-if="classroom.totalMateriais === 0">
               <li class="text-muted text-white">No materials available</li>
             </template>
             <!-- Lista os materiais se existirem -->
@@ -138,10 +138,13 @@ export default {
   },
   created() {
     this.atualizarMaterial();
+    this.atualizarAlunos();
   },
   methods: {
     setActiveTab(tab) {
       this.activeTab = tab;
+      this.atualizarAlunos();
+      this.atualizarMaterial();
     },
     getMaterialsByClassroomCode(codigo) {
       this.materials = axios
@@ -175,10 +178,24 @@ export default {
         .getClassroomById(this.$route.params.id)
         .then((response) => {
           this.classroom = response.data;
-          console.log(this.classroom.codigo);
+          console.log(this.classroom);
           this.getMaterialsByClassroomCode(this.classroom.codigo);
           this.educatorName = this.classroom.educator.name;
           this.students = this.classroom.alunos;
+          this.error = false;
+        })
+        .catch((error) => {
+          this.error = true;
+          console.log(error);
+        });
+    },
+
+    atualizarAlunos() {
+      this.classroom = axios
+        .getIdsAlunos(this.$route.params.id)
+        .then((response) => {
+          this.students = response.data;
+          console.log(response.data);
           this.error = false;
         })
         .catch((error) => {

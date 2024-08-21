@@ -99,6 +99,18 @@ const router = createRouter({
       },
     },
     {
+      path: "/student/classes",
+      name: "studentClasses",
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("../views/Student/ClassesStudentView.vue"),
+      meta: {
+        requiresAuth: true,
+        role: "student",
+      },
+    },
+    {
       path: "/educator/support",
       name: "support",
       // route level code-splitting
@@ -111,6 +123,18 @@ const router = createRouter({
       },
     },
     {
+      path: "/student/support",
+      name: "supportStudent",
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("../views/Student/SupportStudentView.vue"),
+      meta: {
+        requiresAuth: true,
+        role: "student",
+      },
+    },
+    {
       path: "/educator/classroom/:id",
       name: "classroom",
       // route level code-splitting
@@ -120,6 +144,19 @@ const router = createRouter({
       meta: {
         requiresAuth: true,
         role: "educator",
+      },
+    },
+
+    {
+      path: "/student/classroom/:id",
+      name: "classroomStudent",
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("../views/Classes/ClasseView.vue"),
+      meta: {
+        requiresAuth: true,
+        role: "student",
       },
     }
   ],

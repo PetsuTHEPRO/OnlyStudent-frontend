@@ -165,17 +165,19 @@ export default {
 
       // Make a request to the backend API to verify the login credentials
       axios
-        .updateUser(this.user)
+        .updateUser(this.user, this.role)
         .then(() => {
           // Handle successful update response
           notificationService.success(
             "Dados do usuário atualizados com sucesso!"
           );
+
+          CookiesService.setName(this.user.name);
         })
         .catch((error) => {
           if (error.response) {
             // O servidor respondeu com um status fora do intervalo 2xx
-            notificationService.error(error.response.data);
+            notificationService.error(error.response);
           } else {
             notificationService.error(
               "Servidor Offline, entre em contato com a equipe técnica!"

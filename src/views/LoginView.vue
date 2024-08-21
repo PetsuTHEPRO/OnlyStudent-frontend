@@ -8,7 +8,7 @@ import CardLogin from "../components/CardLogin.vue";
   </header>
   <div class="d-flex align-items-center justify-content-center bg-purple text-white">
       <div class="row align-items-center">
-        <div class="col-md-6 col-sm-12">
+        <div class="d-none d-lg-block col-md-6 col-sm-12">
           <img src="../components/icons/Login.png" alt="Imagem de Login" style="width: 80%;">
         </div>
 

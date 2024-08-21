@@ -1,7 +1,7 @@
 <script setup>
 import MenuBar from "@/components/MenuBar.vue";
 import SideBar from "@/components/SideBar.vue";
-import Classes from "@/components/Classes.vue";
+import ClassesStudent from "@/components/ClassesStudent.vue";
 </script>
 
 <template>
@@ -10,8 +10,8 @@ import Classes from "@/components/Classes.vue";
       <SideBar />
     </div>
     <div class="col-md-10 ps-0">
-      <MenuBar role="Professor" />
-      <Classes />
+      <MenuBar role="Estudante" />
+      <ClassesStudent />
     </div>
   </div>
 </template>

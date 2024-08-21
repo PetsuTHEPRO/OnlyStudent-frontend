@@ -10,7 +10,7 @@ import SideBar from "../../components/SideBar.vue";
       <SideBar />
     </div>
     <div class="col-md-10 ps-0">
-      <MenuBar role="Educador" />
+      <MenuBar role="Professor" />
       <ClassroomDetails />
     </div>
   </div>
@@ -30,6 +30,11 @@ h5 {
 
 .bg-educator{
   background-color: #121214 !important;
+}
+
+.bg-purple {
+  background-color: #131212 !important;
+  border-right: 2px solid #424141 !important;
 }
 
 </style>

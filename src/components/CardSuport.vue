@@ -13,7 +13,7 @@
       <div class="card-body">
         <form @submit.prevent="submitSupportRequest" class="row g-3">
           <div class="col-12">
-            <label for="email" class="form-label text-white">Email</label>
+            <label for="email" class="form-label text-white">Email pra Contato</label>
             <input
               v-model="support.email"
               type="email"
@@ -23,7 +23,7 @@
             />
           </div>
           <div class="col-12">
-            <label for="phone" class="form-label text-white">Phone</label>
+            <label for="phone" class="form-label text-white">Telefone pra Contato</label>
             <input
               v-model="support.phone"
               type="tel"
@@ -33,7 +33,7 @@
             />
           </div>
           <div class="col-12">
-            <label for="reason" class="form-label text-white">Reason for Support</label>
+            <label for="reason" class="form-label text-white">Razão da Solicitação</label>
             <select v-model="support.razao" id="reason" class="form-select text-white input-text">
               <option value="" disabled selected>Select reason</option>
               <option value="bugs">Bugs e Glitchs</option>
@@ -47,7 +47,7 @@
           </div>
 
           <div class="col-12">
-            <label for="description" class="form-label text-white">Description</label>
+            <label for="description" class="form-label text-white">Descrição</label>
             <textarea
               v-model="support.descricao"
               id="description"
@@ -175,6 +175,40 @@ export default {
 
 .input-text::placeholder {
   color: #5e5e5e !important;
+}
+
+.btn-solicitar {
+    background-color: #007bff; /* Cor de fundo padrão */
+    color: white; /* Cor do texto */
+    border: none; /* Remover borda padrão */
+    padding: 10px 20px; /* Espaçamento interno */
+    font-size: 1rem; /* Tamanho da fonte */
+    border-radius: 5px; /* Arredondar cantos */
+    transition: background-color 0.3s ease; /* Transição suave ao passar o mouse */
+}
+
+.btn-solicitar:hover {
+    background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+}
+
+.btn-solicitar:disabled {
+    background-color: #6c757d; /* Cor de fundo quando desabilitado */
+    cursor: not-allowed; /* Cursor indicando que está desabilitado */
+}
+
+.spinner-border {
+    margin-right: 5px; /* Espaçamento entre o spinner e o texto */
+}
+
+.btn-solicitar:focus {
+    outline: none; /* Remover a borda de foco */
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); /* Adicionar sombra ao focar */
+}
+
+.btn-solicitar span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 </style>

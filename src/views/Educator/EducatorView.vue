@@ -11,7 +11,7 @@ import CardClass from "../../components/CardClass.vue";
         <SideBar />
       </div>
       <div class="col-md-10 ps-0 d-flex flex-column">
-        <MenuBar role="Educador" />
+        <MenuBar role="Professor" />
         <main class="flex-grow-1 p-4">
           <header
             class="d-flex align-items-center justify-content-between mb-4"
@@ -21,7 +21,8 @@ import CardClass from "../../components/CardClass.vue";
           <section>
             <h2 class="h4 fw-semibold mb-3">Suas turmas</h2>
             <div class="row g-3">
-              <div
+              <span v-if="classrooms.length === 0">Não há turmas, crie uma.</span>
+              <div v-else
                 class="col-md-6 col-lg-4"
                 v-for="classroom in classrooms"
                 :key="classroom.codigo"
@@ -91,6 +92,11 @@ h5 {
 
 .bg-educator{
   background-color: #121214 !important;
+}
+
+.bg-purple {
+  background-color: #131212 !important;
+  border-right: 2px solid #424141 !important;
 }
 
 </style>

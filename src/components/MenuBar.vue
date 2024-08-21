@@ -2,6 +2,20 @@
   <header
     class="d-flex align-items-center justify-content-between bg-black px-4 py-2 mb-5 mt-2 border-bottom border-top border-2 border-purple"
   >
+  <!-- Botão para abrir o menu -->
+  <button 
+        class="d-lg-none btn btn-light me-2" 
+        @click="openMenu" 
+        v-if="!isMenuOpen">
+        <i class="bi bi-list"></i>
+      </button>
+      <!-- Botão para fechar o menu -->
+      <button 
+        class="d-lg-none btn btn-light me-2" 
+        @click="closeMenu" 
+        v-if="isMenuOpen">
+        <i class="bi bi-x-lg"></i>
+      </button>
     <div class="d-flex align-items-center">
       <span class="h4 fw-bold mb-0 text-white">Institucional</span>
       <div
@@ -10,10 +24,11 @@
         {{ role }}
       </div>
     </div>
+
     <div class="d-flex align-items-center">
       <div
-        v-if="role !== 'Educador'"
-        class="border border-2 p-1"
+        v-if="role !== 'Professor'"
+        class="border border-2 p-1 me-3 d-none d-lg-block"
         style="border-radius: 16px"
       >
         <input
@@ -27,6 +42,7 @@
           class="bi bi-search text-white bg-preto border-0 me-2"
           type="button"
           id="button-addon2"
+          @click="search"
         ></button>
       </div>
 
@@ -39,7 +55,7 @@
           width="40"
           height="40"
           style="background-color: white; border-radius: 50%"
-          src="https://robohash.org/profile"
+          :src="`https://robohash.org/${name}`"
         />
         <span class="visually-hidden">Profile</span>
       </button>
@@ -48,6 +64,10 @@
 </template>
 
 <script>
+import CookiesService from '@/api/CookiesService';
+import notificationService from '@/api/notificationService';
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: "MenuBar",
   props: {
@@ -56,7 +76,17 @@ export default {
   data() {
     return {
       saldo: 0,
+      name: CookiesService.getName(),
     };
+  },
+  computed: {
+    ...mapGetters(['isMenuOpen']),
+  },
+  methods: {
+    ...mapActions(['openMenu', 'closeMenu']),
+    search() {
+      notificationService.info('Em desenvolvimento.');
+    },
   },
 };
 </script>
