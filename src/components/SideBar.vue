@@ -88,7 +88,7 @@ export default {
     ...mapActions(["logout"]),
     sair() {
       this.logout();
-      this.$router.go(0);
+      this.$router.go({ name: "home" });
     },
   },
 };
