@@ -78,7 +78,6 @@
 </template>
 
 <script>
-import cookies from '@/service/CookiesService.js';
 export default {
   props: {
     visible: {

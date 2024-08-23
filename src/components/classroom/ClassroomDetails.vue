@@ -1,6 +1,6 @@
 <script setup>
-import Modal from "./MaterialModal.vue";
-import MaterialIcon from "../components/MaterialIcon.vue";
+import Modal from "@/components/MaterialModal.vue";
+import MaterialIcon from "@/components/MaterialIcon.vue";
 </script>
 
 <template>
