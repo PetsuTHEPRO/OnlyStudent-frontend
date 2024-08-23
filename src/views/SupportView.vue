@@ -1,7 +1,7 @@
 <script setup>
-import MenuBar from "../../components/MenuBar.vue";
-import SideBar from "../../components/SideBar.vue";
-import CardSuport from "../../components/CardSuport.vue";
+import MenuBar from "@/components/MenuBar.vue";
+import SideBar from "@/components/SideBar.vue";
+import CardSuport from "@/components/SupportRequest.vue";
 </script>
 
 <template>
@@ -11,7 +11,7 @@ import CardSuport from "../../components/CardSuport.vue";
         <SideBar />
       </div>
       <div class="col-md-10 ps-0 d-flex flex-column">
-        <MenuBar role="Professor" />
+        <MenuBar :role="getRole()" />
         <CardSuport />
         <footer class="footer bg-black text-center py-2 text-white">
           <p class="mb-0">&copy; 2024 Institucional. All rights reserved.</p>
@@ -20,6 +20,26 @@ import CardSuport from "../../components/CardSuport.vue";
     </div>
   </div>
 </template>
+
+<script>
+import CookiesService from "@/service/CookiesService.js";
+
+export default {
+  name: "SupportView",
+  data() {
+    return {
+      role: CookiesService.getRole(),
+    };
+  },
+  methods: {
+    getRole() {
+      return this.role === "educator" ? "Professor" : "Estudante";
+    }
+  }
+
+}
+</script>
+
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap");

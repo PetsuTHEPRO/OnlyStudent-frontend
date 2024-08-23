@@ -1,5 +1,5 @@
 <script setup>
-import CardClass from "@/components/CardClass.vue";
+import CardClass from "@/components/classroom/ClassroomCard.vue";
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import CardClass from "@/components/CardClass.vue";
     <div class="mb-4 d-flex align-items-center justify-content-between">
       <h1 class="h3">Classes</h1>
       
-      <button v-if="cookieService.getRole() === 'educator'" @click="createClassroom" class="btn btn-solicitar text-white">Cadastrar turma</button>
+      <button v-if="role === 'educator'" @click="createClassroom" class="btn btn-solicitar text-white">Cadastrar turma</button>
     </div>
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
@@ -47,42 +47,45 @@ import CardClass from "@/components/CardClass.vue";
 
 <script>
 import axios from "@/api/axios.js";
-import cookieService from "@/api/CookiesService.js";
+import cookieService from "@/service/CookiesService.js";
 
 export default {
   data() {
     return {
-      student: cookieService.getName(),
+      idUser: cookieService.getId(),
+      role: cookieService.getRole(),
       showModal: false,
       statusColor: "",
-      studentAtual: [],
       classrooms: [],
-      id_student: cookieService.getId(),
+      studentAtual: [],
       currentPage: 0,
       totalPages: 1,
       pageSize: 12,
+      
     };
   },
-  created() {},
   mounted() {
-    this.getClassroomsById(this.id_student);
+    this.getClassroomsById(this.idUser, this.currentPage, this.pageSize);
   },
   methods: {
     getStatusClass(status) {
       return `bg-${status.toLowerCase()}`;
     },
     handlePageChange(page) {
-      this.getClassroomsById(this.id_student, page - 1, this.pageSize); // Spring Boot pagination is 0-based
+      this.getClassroomsById(this.idUser, page - 1, this.pageSize); // Spring Boot pagination is 0-based
     },
 
-    getClassroomsById(codigo) {
+    createClassroom() {
+      this.$router.push({ name: "createClassroom" });
+    },
+
+    getClassroomsById(codigo, page, size) {
       axios
-      .getUser(codigo, "student")
+      .getClassroomByIdOfUser(codigo, page, size, this.role)
       .then((response) => {
-          this.studentAtual = response.data;
-          console.log(response.data.classroom);
-          console.log(this.studentAtual.classroom);
-        this.classrooms = this.studentAtual.classroom;
+        this.classrooms = response.data.content;
+        this.currentPage = response.data.number;
+        this.totalPages = response.data.totalPages;
       })
       .catch((error) => {
         console.log(error);

@@ -1,5 +1,5 @@
 <script setup>
-import CardRegister from "../components/CardRegister.vue";
+import CardRegister from "../components/forms/RegisterForm.vue";
 </script>
 
 <template>

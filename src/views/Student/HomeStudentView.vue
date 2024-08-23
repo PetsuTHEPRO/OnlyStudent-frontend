@@ -1,5 +1,5 @@
 <script setup>
-import CardClass from "@/components/CardClass.vue";
+import CardClass from "@/components/classroom/ClassroomCard.vue";
 import SideBar from "@/components/SideBar.vue";
 import MenuBar from "@/components/MenuBar.vue";
 </script>
@@ -47,7 +47,7 @@ import MenuBar from "@/components/MenuBar.vue";
 
 <script>
 import axios from "@/api/axios.js";
-import cookiesService from "../../api/CookiesService";
+import cookiesService from "@/service/CookiesService.js";
 
 export default {
   data() {
@@ -57,10 +57,10 @@ export default {
     };
   },
   mounted() {
-    axios.getClassroomsTurmaAluno(cookiesService.getId())
+    axios.getClassroomsHomeByCode(cookiesService.getId())
     .then((response) => {
       this.classrooms = response.data;
-      console.log(this.classrooms[0]);
+      console.log(this.classrooms);
     }).catch((error) => {
       console.log(error);
     });

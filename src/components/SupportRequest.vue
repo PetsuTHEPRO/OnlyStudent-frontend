@@ -79,8 +79,8 @@
 
 <script>
 import axios from "@/api/axios.js";
-import CookiesService from "@/api/CookiesService";
-import notificationService from '@/api/notificationService.js'
+import CookiesService from "@/service/CookiesService.js";
+import notificationService from '@/service/notificationService.js'
 
 export default {
   data() {

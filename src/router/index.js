@@ -33,7 +33,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/Student/StudentView.vue"),
+      component: () => import("../views/Student/HomeStudentView.vue"),
       meta: {
         requiresAuth: true,
         role: "student",
@@ -93,7 +93,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/Educator/ClassesView.vue"),
+      component: () => import("@/views/ClassesView.vue"),
       meta: {
         requiresAuth: true,
         role: "educator",
@@ -105,7 +105,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/Student/ClassesStudentView.vue"),
+      component: () => import("@/views/ClassesView.vue"),
       meta: {
         requiresAuth: true,
         role: "student",
@@ -117,7 +117,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/Educator/SupportView.vue"),
+      component: () => import("@/views/SupportView.vue"),
       meta: {
         requiresAuth: true,
         role: "educator",
@@ -125,11 +125,11 @@ const router = createRouter({
     },
     {
       path: "/student/support",
-      name: "supportStudent",
+      name: "suportStudent",
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/Student/SupportStudentView.vue"),
+      component: () => import("@/views/SupportView.vue"),
       meta: {
         requiresAuth: true,
         role: "student",

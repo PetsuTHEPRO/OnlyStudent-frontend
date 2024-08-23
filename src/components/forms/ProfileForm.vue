@@ -106,8 +106,8 @@
 </template>
 
 <script>
-import notificationService from "@/api/notificationService.js";
-import CookiesService from "@/api/CookiesService.js";
+import notificationService from "@/service/notificationService.js";
+import CookiesService from "@/service/CookiesService.js";
 import axios from "@/api/axios.js";
 
 export default {

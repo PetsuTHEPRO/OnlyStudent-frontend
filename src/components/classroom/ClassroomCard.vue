@@ -55,8 +55,8 @@
 
 <script>
 import Axios from "@/api/axios.js";
-import Cookies from "@/api/CookiesService.js";
-import NotificationService from "@/api/notificationService.js";
+import Cookies from "@/service/CookiesService.js";
+import NotificationService from "@/service/notificationService.js";
 
 export default {
   name: "CardClass",
@@ -87,7 +87,6 @@ export default {
       this.hasJoined = Axios.getIdsAlunos(this.classroom.codigo)
       .then((response) => {
           this.alunosIds = response.data; // Armazena os IDs dos alunos
-          console.log(this.alunosIds);
           this.checkIfStudentHasJoined();
         }).catch((error) => {
           console.log(error);

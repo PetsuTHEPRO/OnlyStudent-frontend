@@ -1,7 +1,7 @@
 <script setup>
-import CardProfile from "../../components/CardProfile.vue";
-import MenuBar from "../../components/MenuBar.vue";
-import SideBar from "../../components/SideBar.vue";
+import CardProfile from "@/components/forms/ProfileForm.vue";
+import MenuBar from "@/components/MenuBar.vue";
+import SideBar from "@/components/SideBar.vue";
 </script>
 
 <template>

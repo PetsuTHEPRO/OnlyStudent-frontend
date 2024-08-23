@@ -64,8 +64,8 @@
 </template>
 
 <script>
-import CookiesService from '@/api/CookiesService';
-import notificationService from '@/api/notificationService';
+import CookiesService from '@/service/CookiesService';
+import notificationService from '@/service/notificationService';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {

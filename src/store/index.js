@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import Cookies from '../api/CookiesService'
+import Cookies from '../service/CookiesService'
 
 const store = createStore({
   state: {

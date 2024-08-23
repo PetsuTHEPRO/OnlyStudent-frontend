@@ -1,5 +1,5 @@
 import axios from 'axios';
-import CookiesService from '@/api/CookiesService.js';
+import CookiesService from '@/service/CookiesService.js';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const apiClient = axios.create({
@@ -8,22 +8,31 @@ const apiClient = axios.create({
     'Content-Type': 'application/json'
   }
 });
+const token = CookiesService.getToken();
+
 
 export default {
-  getClassrooms(codigo){
-    
-    const token = CookiesService.getToken();
 
-    return apiClient.get('/turma', {
-      params: { codigo: codigo }, // Parâmetro de consulta
+  // Comando de GET - Banco de Dados
+  findIdEducatorByEducatorEmail(email){
+    return apiClient.get('/educator/idByEmail', {
+      params: { email: email },
       headers: {
         Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
       }
     });
   },
 
-  getClassroomsTurmaAluno(codigo){
-    const token = CookiesService.getToken();
+  findClassroomsByCode(codigo){
+    return apiClient.get('/turma', {
+      params: { codigo: codigo },
+      headers: {
+        Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
+      }
+    });
+  },
+
+  getClassroomsHomeByCode(codigo){
     return apiClient.get('/turma/turmasAluno', {
       params: { codigo: codigo }, // Parâmetro de consulta
       headers: {
@@ -31,6 +40,7 @@ export default {
       }
     });
   },
+
   registerUser(userData){
     return apiClient.post('/auth/register', {
       name: userData.name,
@@ -59,21 +69,18 @@ export default {
     });
   },
 
-  seekIDClassroom(email){
-    return apiClient.get('/educator/findByEmail', {
-      params: { email: email } // Parâmetro de consulta
-    });
-  },
   deleteClassroom(codigo){
     return apiClient.delete(`/turma/${codigo}`);
   },
   
+  // Comando POST - Banco de Dados
+
   createClassroom(classroomData){
     return apiClient.post('/turma/register', {
       name: classroomData.name,
       description: classroomData.description,
       price: classroomData.price,
-      idEducator: classroomData.id_educator
+      idEducator: classroomData.idEducator
     });
   },
 
@@ -87,8 +94,8 @@ export default {
     return apiClient.get(`/turma/${codigo}/students/info`);
   },
 
-  getClassroomsByIdOfEducator(codigo, page, size){
-    return apiClient.get('/turma/turmaEducator', {
+  getClassroomByIdOfUser(codigo, page, size, role){
+    return apiClient.get(`/turma/${role}Turmas`, {
       params: { codigo: codigo, page: page, size: size } // Parâmetro de consulta
     });
   },

@@ -1,7 +1,7 @@
 <script setup>
-import MenuBar from "../../components/MenuBar.vue";
-import SideBar from "../../components/SideBar.vue";
-import CardClass from "../../components/CardClass.vue";
+import MenuBar from "@/components/MenuBar.vue";
+import SideBar from "@/components/SideBar.vue";
+import CardClass from "@/components/classroom/ClassroomCard.vue";
 </script>
 
 <template>
@@ -42,8 +42,8 @@ import CardClass from "../../components/CardClass.vue";
 </template>
 
 <script>
-import axios from "../../api/axios.js";
-import cookieService from "../../api/CookiesService.js";
+import axios from "@/api/axios.js";
+import cookieService from "@/service/CookiesService.js";
 
 export default {
   data() {
@@ -59,7 +59,7 @@ export default {
 
   },
   mounted() {
-    axios.getClassrooms(this.id_educator)
+    axios.findClassroomsByCode(this.id_educator)
     .then((response) => {
       this.classrooms = response.data;
     }).catch((error) => {

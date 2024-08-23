@@ -1,6 +1,6 @@
 <script setup>
-import MenuBar from "../../components/MenuBar.vue";
-import SideBar from "../../components/SideBar.vue";
+import MenuBar from "@/components/MenuBar.vue";
+import SideBar from "@/components/SideBar.vue";
 </script>
 
 <template>
@@ -55,8 +55,8 @@ import SideBar from "../../components/SideBar.vue";
 
 <script>
 import axios from "@/api/axios.js";
-import notificationService from "@/api/notificationService.js";
-import Cookies from "@/api/CookiesService.js";
+import notificationService from "@/service/notificationService.js";
+import Cookies from "@/service/CookiesService.js";
 
 export default {
   data() {
@@ -65,15 +65,15 @@ export default {
         name: "",
         description: "",
         price: 0.0,
-        id_educator: -1,
+        idEducator: 0,
       },
     };
   },
   mounted() {
-    const id = axios
-      .seekIDClassroom(Cookies.getEmail("email"))
+      axios
+      .findIdEducatorByEducatorEmail(Cookies.getEmail())
       .then((response) => {
-        this.classroom.id_educator = response.data;
+        this.classroom.idEducator = response.data;
       })
       .catch((error) => {
         console.log(error);

@@ -62,8 +62,8 @@
 </template>
 
 <script>
-import axios from "../api/axios.js";
-import notificationService from '../api/notificationService.js'
+import axios from "../../api/axios.js";
+import notificationService from '../../service/notificationService.js'
 import { mapActions } from 'vuex';
 
 export default {

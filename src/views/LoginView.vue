@@ -1,5 +1,5 @@
 <script setup>
-import CardLogin from "../components/CardLogin.vue";
+import CardLogin from "../components/forms/LoginForm.vue";
 </script>
 
 <template>

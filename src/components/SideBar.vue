@@ -72,7 +72,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import Cookie from "@/api/CookiesService.js";
+import Cookie from "@/service/CookiesService.js";
 
 export default {
   data() {

@@ -124,7 +124,7 @@
 
 <script>
 import axios from "@/api/axios.js";
-import notificationService from '@/api/notificationService.js'
+import notificationService from '@/service/notificationService.js'
 
 export default {
   data() {

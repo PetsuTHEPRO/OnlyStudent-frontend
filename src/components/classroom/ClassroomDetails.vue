@@ -1,5 +1,5 @@
 <script setup>
-import Modal from "../components/Modal.vue";
+import Modal from "./MaterialModal.vue";
 import MaterialIcon from "../components/MaterialIcon.vue";
 </script>
 
@@ -122,7 +122,7 @@ import MaterialIcon from "../components/MaterialIcon.vue";
 
 <script>
 import axios from "@/api/axios.js";
-import notificationService from "@/api/notificationService.js";
+import notificationService from "@/service/notificationService.js";
 
 export default {
   data() {
