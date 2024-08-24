@@ -5,35 +5,37 @@ import CardClass from "@/components/classroom/ClassroomCard.vue";
 </script>
 
 <template>
-  <div class="container-fluid educator-home-view p-0">
+  <div class="container-fluid d-flex educator-home-view p-0">
     <SideBar />
-    <MenuBar role="Professor"/>
-    <main class="p-4">
-      <header class="d-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 fw-bold">Olá, {{ educator }}</h1>
-      </header>
-      <section>
-        <h2 class="h4 fw-semibold mb-3">Suas turmas</h2>
-        <div class="row g-3">
-          <span v-if="classrooms.length === 0">Não há turmas, crie uma.</span>
-          <div
-            v-else
-            class="col-md-6 col-lg-4"
-            v-for="classroom in classrooms"
-            :key="classroom.codigo"
-          >
-            <CardClass
-              :classroom="classroom"
-              :statusColor="getStatusClass(classroom.status)"
-            />
+    <div class="container-fluid ww p-0">
+      <MenuBar role="Professor" />
+      <main class="p-4 min-vh-100">
+        <header class="d-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 fw-bold">Olá, {{ educator }}</h1>
+        </header>
+        <section>
+          <h2 class="h4 fw-semibold mb-3">Suas turmas</h2>
+          <div class="row g-3">
+            <span v-if="classrooms.length === 0">Não há turmas, crie uma.</span>
+            <div
+              v-else
+              class="col-md-6 col-lg-4"
+              v-for="classroom in classrooms"
+              :key="classroom.codigo"
+            >
+              <CardClass
+                :classroom="classroom"
+                :statusColor="getStatusClass(classroom.status)"
+              />
+            </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+      <footer class="footer bg-black text-center py-2 text-white">
+        <p class="mb-0">&copy; 2024 Institucional. All rights reserved.</p>
+      </footer>
+    </div>
   </div>
-  <footer class="footer bg-black text-center py-2 text-white">
-    <p class="mb-0">&copy; 2024 Institucional. All rights reserved.</p>
-  </footer>
 </template>
 
 <script>
@@ -83,7 +85,11 @@ export default {
   min-height: 100vh;
 }
 
-footer{
+footer {
   bottom: 0;
+}
+
+.ww{
+  margin-left: 70px;
 }
 </style>

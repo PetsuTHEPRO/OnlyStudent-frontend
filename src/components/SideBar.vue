@@ -49,7 +49,6 @@ export default {
   width: 200px;
   background-color: #343a40;
   color: white;
-  height: 100vh;
   transition: width 0.3s ease-in-out;
   z-index: 1000;
 }
@@ -73,18 +72,18 @@ export default {
 /* Media query para dispositivos móveis */
 @media (max-width: 768px) {
   .sidebar {
-    width: 100%;
+    width: 35%;
+    height: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    height: 100%;
     z-index: 1050;
-    transform: translateX(-100%);
+    transform: translateX(0%);
     transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
   }
 
   .sidebar.sidebar-closed {
-    transform: translateX(-100%);
+    transform: translateX(0%);
   }
 
   .sidebar-open {
@@ -92,7 +91,7 @@ export default {
   }
 
   .sidebar-closed {
-    width: 80px;
+    width: 70px;
   }
 
   .sidebar .bi {
