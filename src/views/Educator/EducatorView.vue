@@ -30,10 +30,10 @@ import CardClass from "@/components/classroom/ClassroomCard.vue";
         </div>
       </section>
     </main>
-    <footer class="footer bg-black text-center py-2 text-white">
-      <p class="mb-0">&copy; 2024 Institucional. All rights reserved.</p>
-    </footer>
   </div>
+  <footer class="footer bg-black text-center py-2 text-white">
+    <p class="mb-0">&copy; 2024 Institucional. All rights reserved.</p>
+  </footer>
 </template>
 
 <script>
@@ -81,5 +81,9 @@ export default {
   background-color: #1a001a;
   color: white;
   min-height: 100vh;
+}
+
+footer{
+  bottom: 0;
 }
 </style>
