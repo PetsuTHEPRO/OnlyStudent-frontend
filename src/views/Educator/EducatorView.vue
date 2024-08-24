@@ -6,13 +6,11 @@ import CardClass from "@/components/classroom/ClassroomCard.vue";
 
 <template>
   <div class="d-flex flex-column bg-educator text-white">
-    <div class="row  min-vh-100">
-      <div class="col-md-2 bg-purple">
+    <div class="row">
+      <div class="d-flex">
         <SideBar />
-      </div>
-      <div class="col-md-10 ps-0 d-flex flex-column">
-        <MenuBar role="Professor" />
-        <main class="flex-grow-1 p-4">
+        <main class="flex-grow-1 p-3">
+          <MenuBar role="Professor" />
           <header
             class="d-flex align-items-center justify-content-between mb-4"
           >
@@ -31,11 +29,10 @@ import CardClass from "@/components/classroom/ClassroomCard.vue";
               </div>
             </div>
           </section>
+          <footer class="footer bg-black text-center py-2 text-white">
+            <p class="mb-0">&copy; 2024 Institucional. All rights reserved.</p>
+          </footer>
         </main>
-
-        <footer class="footer bg-black text-center py-2 text-white">
-          <p class="mb-0">&copy; 2024 Institucional. All rights reserved.</p>
-        </footer>
       </div>
     </div>
   </div>
@@ -44,6 +41,7 @@ import CardClass from "@/components/classroom/ClassroomCard.vue";
 <script>
 import axios from "@/api/axios.js";
 import cookieService from "@/service/CookiesService.js";
+import store from "@/store/index.js";
 
 export default {
   data() {
@@ -53,10 +51,8 @@ export default {
       statusColor: "",
       classrooms: [],
       id_educator: cookieService.getId(),
+      isSidebarOpen: store.state.isSidebarOpen,
     };
-  },
-  created() {
-
   },
   mounted() {
     axios.findClassroomsByCode(this.id_educator)
@@ -81,22 +77,8 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap");
 
-body {
-  margin: 0;
-}
-h1,
-h2,
-h5 {
-  color: white;
-}
-
 .bg-educator{
   background-color: #121214 !important;
-}
-
-.bg-purple {
-  background-color: #131212 !important;
-  border-right: 2px solid #424141 !important;
 }
 
 </style>

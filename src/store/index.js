@@ -8,18 +8,12 @@ const store = createStore({
     email: Cookies.getEmail() || '',
     name: Cookies.getName() || '',
     id: Cookies.getId() || '',
-    isMenuOpen: false,
+    isSidebarOpen: false,
   },
   mutations: {
 
-    TOGGLE_MENU(state) {
-      state.isOpen = !state.isOpen;
-    },
     OPEN_MENU(state) {
-      state.isOpen = true;
-    },
-    CLOSE_MENU(state) {
-      state.isOpen = false;
+      state.isSidebarOpen = true;
     },
     setAuthToken(state, token) {
       state.authToken = token
@@ -61,14 +55,8 @@ const store = createStore({
     logout({ commit }) {
       commit('clearAll')
     },
-    toggleMenu({ commit }) {
-      commit('TOGGLE_MENU');
-    },
     openMenu({ commit }) {
       commit('OPEN_MENU');
-    },
-    closeMenu({ commit }) {
-      commit('CLOSE_MENU');
     },
   },
   getters: {
@@ -77,7 +65,7 @@ const store = createStore({
     email: state => state.email,
     name: state => state.name,
     id: state => state.id,
-    isMenuOpen: state => state.isOpen,
+    isMenuOpen: state => state.isSidebarOpen,
   }
 })
 

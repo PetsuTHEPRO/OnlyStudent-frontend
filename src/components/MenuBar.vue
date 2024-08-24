@@ -2,20 +2,11 @@
   <header
     class="d-flex align-items-center justify-content-between bg-black px-4 py-2 mb-5 mt-2 border-bottom border-top border-2 border-purple"
   >
-  <!-- Botão para abrir o menu -->
-  <button 
-        class="d-lg-none btn btn-light me-2" 
-        @click="openMenu" 
-        v-if="!isMenuOpen">
-        <i class="bi bi-list"></i>
-      </button>
-      <!-- Botão para fechar o menu -->
-      <button 
-        class="d-lg-none btn btn-light me-2" 
-        @click="closeMenu" 
-        v-if="isMenuOpen">
-        <i class="bi bi-x-lg"></i>
-      </button>
+    <!-- Botão para abrir o menu -->
+    <button @click="openMenu" class="btn btn-primary d-md-none mb-3" >
+      <i class="bi bi-list"></i>
+    </button>
+
     <div class="d-flex align-items-center">
       <span class="h4 fw-bold mb-0 text-white">Institucional</span>
       <div
@@ -49,7 +40,9 @@
       <span class="bg-warning text-black px-2 py-1 rounded-pill">
         R$ {{ saldo }}
       </span>
-      <button class="bi bi-bell-fill rounded-circle mx-4 text-white notificati"></button>
+      <button
+        class="bi bi-bell-fill rounded-circle mx-4 text-white notificati"
+      ></button>
       <button class="btn btn-outline-light rounded-circle p-0">
         <img
           width="40"
@@ -64,9 +57,9 @@
 </template>
 
 <script>
-import CookiesService from '@/service/CookiesService';
-import notificationService from '@/service/notificationService';
-import { mapGetters, mapActions } from 'vuex';
+import CookiesService from "@/service/CookiesService";
+import notificationService from "@/service/notificationService";
+import store from "@/store/index.js";
 
 export default {
   name: "MenuBar",
@@ -79,13 +72,13 @@ export default {
       name: CookiesService.getName(),
     };
   },
-  computed: {
-    ...mapGetters(['isMenuOpen']),
-  },
   methods: {
-    ...mapActions(['openMenu', 'closeMenu']),
+    openMenu() {
+      store.state.isSidebarOpen = !store.state.isSidebarOpen;
+      console.log(store.state.isSidebarOpen);
+    },
     search() {
-      notificationService.info('Em desenvolvimento.');
+      notificationService.info("Em desenvolvimento.");
     },
   },
 };
@@ -121,10 +114,28 @@ input[text] {
   border-radius: 25px !important;
 }
 
-.notificati{
+.notificati {
   padding: 6px 9px;
   border: none;
   background-color: #7d1479;
 }
 
+/* Custom Switch Styles */
+.form-check-input:checked {
+  background-color: #0d6efd; /* Cor de fundo quando ativado */
+  border-color: #0d6efd; /* Cor da borda quando ativado */
+}
+
+.form-check-input:focus {
+  box-shadow: none; /* Remove o foco padrão */
+}
+
+.form-check-input:checked:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Adiciona sombra personalizada quando ativado */
+}
+
+/* Custom Label Styles */
+.form-check-label {
+  margin-left: 10px; /* Espaçamento entre o switch e o texto */
+}
 </style>

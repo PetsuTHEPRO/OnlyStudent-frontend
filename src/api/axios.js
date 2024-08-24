@@ -8,13 +8,12 @@ const apiClient = axios.create({
     'Content-Type': 'application/json'
   }
 });
-const token = CookiesService.getToken();
-
 
 export default {
 
   // Comando de GET - Banco de Dados
   findIdEducatorByEducatorEmail(email){
+    const token = CookiesService.getToken();
     return apiClient.get('/educator/idByEmail', {
       params: { email: email },
       headers: {
@@ -24,6 +23,7 @@ export default {
   },
 
   findClassroomsByCode(codigo){
+    const token = CookiesService.getToken();
     return apiClient.get('/turma', {
       params: { codigo: codigo },
       headers: {
@@ -33,6 +33,7 @@ export default {
   },
 
   getClassroomsHomeByCode(codigo){
+    const token = CookiesService.getToken();
     return apiClient.get('/turma/turmasAluno', {
       params: { codigo: codigo }, // Parâmetro de consulta
       headers: {
@@ -41,24 +42,15 @@ export default {
     });
   },
 
-  registerUser(userData){
-    return apiClient.post('/auth/register', {
-      name: userData.name,
-      telephone: userData.telephone,
-      email: userData.email,
-      password: userData.password,
-      role: userData.role,
-      especialidade: userData.especialidade
-    });
-  },
-
   updateUser(user, role) {
-    role = role.toLowerCase();
-    console.log(user.name + " - " + user.especialidade + " - " + user.telefone + " - " + user.login);
-    return apiClient.put(`/${role}/updateProfile?login=${user.login}`, {
+    const token = CookiesService.getToken();
+    return apiClient.put(`/${role.toLowerCase()}/updateProfile?login=${user.login}`, {
       name: user.name,
       telefone: user.telefone,
-      especialidade: user.especialidade
+      especialidade: user.especialidade,
+      headers: {
+        Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
+      }
     });
   },
 
@@ -81,6 +73,17 @@ export default {
       description: classroomData.description,
       price: classroomData.price,
       idEducator: classroomData.idEducator
+    });
+  },
+
+  registerUser(userData){
+    return apiClient.post('/auth/register', {
+      name: userData.name,
+      telephone: userData.telephone,
+      email: userData.email,
+      password: userData.password,
+      role: userData.role,
+      especialidade: userData.especialidade
     });
   },
 

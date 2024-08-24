@@ -143,15 +143,12 @@ export default {
   methods: {
     setActiveTab(tab) {
       this.activeTab = tab;
-      this.atualizarAlunos();
-      this.atualizarMaterial();
     },
     getMaterialsByClassroomCode(codigo) {
       this.materials = axios
         .getMaterialsByClassroomCode(codigo)
         .then((response) => {
           this.materials = response.data;
-          console.log(this.materials);
         })
         .catch((error) => {
           console.log(error);
@@ -178,14 +175,11 @@ export default {
         .getClassroomById(this.$route.params.id)
         .then((response) => {
           this.classroom = response.data;
-          console.log(this.classroom);
           this.getMaterialsByClassroomCode(this.classroom.codigo);
           this.educatorName = this.classroom.educator.name;
           this.students = this.classroom.alunos;
-          this.error = false;
         })
         .catch((error) => {
-          this.error = true;
           console.log(error);
         });
     },
@@ -195,11 +189,8 @@ export default {
         .getIdsAlunos(this.$route.params.id)
         .then((response) => {
           this.students = response.data;
-          console.log(response.data);
-          this.error = false;
         })
         .catch((error) => {
-          this.error = true;
           console.log(error);
         });
     },

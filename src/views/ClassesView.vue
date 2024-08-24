@@ -38,22 +38,4 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap");
 
-body {
-  margin: 0;
-}
-h1,
-h2,
-h5 {
-  color: white;
-}
-
-.bg-educator{
-  background-color: #121214 !important;
-}
-
-.bg-purple {
-  background-color: #131212 !important;
-  border-right: 2px solid #424141 !important;
-}
-
 </style>

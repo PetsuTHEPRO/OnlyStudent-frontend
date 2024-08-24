@@ -1,5 +1,6 @@
 <script setup>
 import NavBar from '../components/NavBar.vue';
+import { DarkMode } from '@vue-a11y/dark-mode';
 </script>
 
 <template>
@@ -28,11 +29,45 @@ import NavBar from '../components/NavBar.vue';
       </div>
     </main>
   </div>
+  <VueDarkMode>
+  <template v-slot="mode">
+    Color mode: {{ mode }}
+  </template>
+  </VueDarkMode>
   </main>
 </template>
 
+<script>
+export default {
+  // ...
+  components: {
+    DarkMode
+  },
+  // ...
+  data() {
+    return {
+      mode: 'light',
+    };
+  }
+}
+
+</script>
+
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root {
+  --bg: #fff;
+  --color: #222;
+}
+html.dark-mode {
+  --bg: #222;
+  --color: #fff;
+}
+body {
+  background-color: var(--bg);
+  color: var(--color);
+}
 
   .badge{
     background-color: #000 !important;
