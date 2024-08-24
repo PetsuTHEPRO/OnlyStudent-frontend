@@ -2,12 +2,7 @@
   <header
     class="d-flex align-items-center justify-content-between bg-black px-4 py-2 mb-5 mt-2 border-bottom border-top border-2 border-purple"
   >
-    <!-- Botão para abrir o menu -->
-    <button @click="openMenu" class="btn btn-primary d-md-none mb-3" >
-      <i class="bi bi-list"></i>
-    </button>
-
-    <div class="d-flex align-items-center">
+    <div class="d-none d-lg-block d-flex align-items-center">
       <span class="h4 fw-bold mb-0 text-white">Institucional</span>
       <div
         class="ms-3 px-3 py-1 rounded-pill bg-success text-white text-xs fw-medium"

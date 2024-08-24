@@ -6,10 +6,10 @@
       </button>
       <ul class="nav flex-column">
         <li class="nav-item" v-for="item in menuItems" :key="item.text">
-          <a class="nav-link d-flex align-items-center" href="#">
+          <router-link :to="`/${role}/${item.rota}`" active-class="router-link-active" class="nav-link d-flex align-items-center">
             <i :class="item.icon"></i>
             <span v-if="isOpen" class="ms-2">{{ item.text }}</span>
-          </a>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -18,16 +18,19 @@
 
 <script>
 import store from "@/store/index.js";
+import Cookie from "@/service/CookiesService.js";
 
 export default {
   data() {
     return {
+      role: Cookie.getRole(),
       isOpen: store.state.isSidebarOpen,
       menuItems: [
-        { text: 'Dashboard', icon: 'bi bi-house' },
-        { text: 'Profile', icon: 'bi bi-person' },
-        { text: 'Settings', icon: 'bi bi-gear' },
-        { text: 'Logout', icon: 'bi bi-box-arrow-right' },
+        { text: 'Home', icon: 'bi bi-house', rota: '' },
+        { text: 'Profile', icon: 'bi bi-person', rota: 'profile' },
+        { text: 'Classes', icon: 'bi bi-book', rota: 'classes' },
+        { text: 'Support', icon: 'bi bi-question-circle', rota: 'support' },
+        { text: 'Logout', icon: 'bi bi-box-arrow-right', rota: 'logout' },
       ],
     };
   },
@@ -43,7 +46,7 @@ export default {
 
 <style scoped>
 .sidebar {
-  width: 250px;
+  width: 200px;
   background-color: #343a40;
   color: white;
   height: 100vh;
