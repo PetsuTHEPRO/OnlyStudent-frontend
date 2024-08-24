@@ -1,5 +1,5 @@
 <template>
-  <nav :class="['sidebar', { 'sidebar-closed': !isOpen }, {'sidebar-mobile-open': isOpen}]">
+  <nav :class="['sidebar', { 'sidebar-closed': !isOpen }]">
     <div class="d-flex flex-column align-items-start p-3">
       <button @click="toggleSidebar" class="btn btn-secondary mb-4">
         <i :class="isOpen ? 'bi bi-chevron-left' : 'bi bi-chevron-right'"></i>
@@ -69,8 +69,31 @@ export default {
 
 /* Media query para dispositivos móveis */
 @media (max-width: 768px) {
-  .sidebar-mobile-open {
-    position: absolute !important;
+  .sidebar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1050;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+  }
+
+  .sidebar.sidebar-closed {
+    transform: translateX(-100%);
+  }
+
+  .sidebar-open {
+    transform: translateX(0);
+  }
+
+  .sidebar-closed {
+    width: 80px;
+  }
+
+  .sidebar .bi {
+    font-size: 1.2rem;
   }
 }
 </style>
