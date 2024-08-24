@@ -1,10 +1,13 @@
 <template>
   <nav :class="['sidebar', { 'sidebar-closed': !isOpen }]">
-    <div class="d-flex flex-column align-items-start p-3">
-      <button @click="toggleSidebar" class="btn btn-secondary mb-4">
-        <i :class="isOpen ? 'bi bi-chevron-left' : 'bi bi-chevron-right'"></i>
-      </button>
-      <ul class="nav flex-column">
+    <div class="d-flex flex-column align-items-center p-0">
+      <div class="d-flex w-100 align-items-center justify-content-around py-4">
+        <h3 :class="['fw-bold fs-5', { 'd-none': !isOpen }]">Only Study</h3>
+        <button @click="toggleSidebar" class="btn-sidebar d-flex align-items-center justify-content-center">
+          <i :class="isOpen ? 'bi bi-chevron-left' : 'bi bi-chevron-right'"></i>
+        </button>
+      </div>
+      <ul class="nav flex-column px-2">
         <li class="nav-item" v-for="item in menuItems" :key="item.text">
           <router-link :to="`/${role}/${item.rota}`" active-class="router-link-active" class="nav-link d-flex align-items-center">
             <i :class="item.icon"></i>
@@ -53,6 +56,15 @@ export default {
   z-index: 1000;
 }
 
+.btn-sidebar{
+    width: 43px;
+    height: 43px;
+    border-radius: 25%;
+    border: none;
+    color: white;
+    background-color: #111;
+}
+
 .sidebar-closed {
   width: 80px;
 }
@@ -71,6 +83,16 @@ export default {
 
 /* Media query para dispositivos móveis */
 @media (max-width: 768px) {
+  
+  .btn-sidebar{
+    width: 30px;
+    height: 30px;
+    border-radius: 25%;
+    border: none;
+    color: white;
+    background-color: #111;
+  }
+
   .sidebar {
     width: 35%;
     height: 100%;

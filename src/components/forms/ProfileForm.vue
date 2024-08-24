@@ -193,6 +193,7 @@ export default {
 </script>
 
 <style>
+
 .card{
   background-color: #1A1A1E;
   color: white;

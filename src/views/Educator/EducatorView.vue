@@ -7,7 +7,7 @@ import CardClass from "@/components/classroom/ClassroomCard.vue";
 <template>
   <div class="container-fluid d-flex educator-home-view p-0">
     <SideBar />
-    <div class="container-fluid ww p-0">
+    <div class="container-fluid margin-mobile p-0">
       <MenuBar role="Professor" />
       <main class="p-4 min-vh-100">
         <header class="d-flex align-items-center justify-content-between mb-4">
@@ -85,11 +85,10 @@ export default {
   min-height: 100vh;
 }
 
-footer {
-  bottom: 0;
-}
-
-.ww{
+/* Media query para dispositivos móveis */
+@media (max-width: 768px) {
+.margin-mobile{
   margin-left: 70px;
+}
 }
 </style>

@@ -1,30 +1,33 @@
 <script setup>
-import CardProfile from "@/components/forms/ProfileForm.vue";
+import ProfileForm from "@/components/forms/ProfileForm.vue";
 import MenuBar from "@/components/MenuBar.vue";
 import SideBar from "@/components/SideBar.vue";
 </script>
 
 <template>
-  <div class="d-flex flex-column bg-educator text-white">
-    <div class="row min-vh-100">
-      <div class="col-md-2 bg-purple">
-        <SideBar />
-      </div>
-      <div class="col-md-10 p-0 m-0">
-        <MenuBar role="Professor" /> 
-          <header
-            class="d-flex align-items-center justify-content-between"
-          ></header>
-          <CardProfile />
-      </div>
-    </div>
+  <div class="ontainer-fluid d-flex educator-profile-view p-0">
+    <SideBar />
+    <div class="container-fluid margin-mobile p-0">
+    <MenuBar role="Professor" />
+    <header class="d-flex align-items-center justify-content-between"></header>
+    <ProfileForm />
+  </div>
   </div>
 </template>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap");
 
-.bg-educator{
-  background-color: #121214 !important;
+.educator-profile-view {
+  background-color: #1a001a;
+  color: white;
+  min-height: 100vh;
+}
+
+/* Media query para dispositivos móveis */
+@media (max-width: 768px) {
+.margin-mobile{
+  margin-left: 70px;
+}
 }
 </style>
