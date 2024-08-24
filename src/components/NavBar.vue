@@ -1,5 +1,5 @@
 <template>
-  <header class="d-flex align-items-center justify-content-between bg-black px-4 py-2 mb-5 mt-2 border-bottom border-top border-3 border-purple">
+  <header class="d-flex align-items-center justify-content-between bg-black px-4 py-2 mb-5 border-bottom border-top border-3 border-purple">
     <router-link class="fw-bolder" style="color: white; text-decoration: none;" to="/">Only Study</router-link>
     <div>
       <nav class="d-flex align-items-center">
