@@ -1,9 +1,6 @@
 <template>
-  <div class="flex-1 px-6 bg-profile">
+  <div class="flex-1 px-2">
     <div class="mb-4">
-      <div class="d-flex align-items-center justify-content-between">
-        <h1 class="h2 fw-bold">Profile</h1>
-      </div>
 
       <div class="card">
         <div class="card-header">
