@@ -1,13 +1,13 @@
 <template>
-  <header class="d-flex align-items-center justify-content-between bg-black px-4 py-2 mb-5 border-bottom border-top border-3 border-purple">
+  <header class="d-flex align-items-center justify-content-between bg-black px-4 py-2 border-bottom border-top border-3 border-purple">
     <router-link class="fw-bolder" style="color: white; text-decoration: none;" to="/">Only Study</router-link>
     <div>
       <nav class="d-flex align-items-center">
-        <router-link to="/login" class="btn-nav login-link d-flex align-items-center me-4 text-decoration-none fw-bold">
+        <router-link v-if="currentScreen() !== 'login'" to="/login" class="btn-nav login-link d-flex align-items-center me-4 text-decoration-none fw-bold">
           <img class="me-1" src="@/components/icons/Customer.png" alt="">
           LOG IN
         </router-link>
-        <router-link to="/register"
+        <router-link  v-if="currentScreen() !== 'register'" to="/register"
           class="btn-nav register-link px-4 py-2 fw-bolder text-white border border-purple rounded text-decoration-none"
           @click="register"
         >
@@ -18,7 +18,16 @@
   </header>
 </template>
 
-<script></script>
+<script>
+export default {
+  name: "NavBar",
+  methods: {
+    currentScreen() {
+      return this.$route.name;
+    }
+  }
+}
+</script>
 
 <style scoped>
 nav {

@@ -112,11 +112,6 @@
             CONFIRMAR
           </button>
         </div>
-        <div class="d-flex align-items-center">
-          <hr class="flex-grow-1 border border-white" />
-          <div class="text-white mx-4">Outras opções de login</div>
-          <hr class="flex-grow-1 border border-light" />
-        </div>
       </form>
     </div>
   </main>
