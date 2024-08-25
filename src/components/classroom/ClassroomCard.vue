@@ -1,3 +1,6 @@
+<script setup>
+import StatusModal from "@/components/StatusTurmaModal.vue";
+</script>
 <template>
   <div class="card bg-card text-white">
     <div class="card-header d-flex justify-content-between">
@@ -25,7 +28,7 @@
 
       <!-- Botões específicos para Educator -->
       <template v-if="userRole === 'educator'">
-        <button class="btn btn-outline-light rounded-circle">
+        <button class="btn btn-outline-light rounded-circle" @click="showModal = true">
           <i class="bi bi-gear" style="font-size: 1.2rem"></i>
           <span class="visually-hidden">Configurações</span>
         </button>
@@ -50,6 +53,16 @@
         </button>
       </template>
     </div>
+
+    <!-- Modal Component -->
+    <StatusModal
+        :visible="showModal"
+        :idTurma="classroom.codigo"
+        @close="showModal = false"
+        @submit="addMaterial"
+      >
+      <template #title>Configuração Turma</template>
+    </StatusModal>
   </div>
 </template>
 
@@ -78,35 +91,32 @@ export default {
     return {
       userRole: Cookies.getRole(),
       hasJoined: false,
+      classrooms: [],
       alunosIds: [],
+      showModal: false, // Controla a visibilidade do modal
     };
   },
   mounted() {
 
-    if(Cookies.getRole() == 'student'){
-      this.hasJoined = Axios.getIdsAlunos(this.classroom.codigo)
-      .then((response) => {
-          this.alunosIds = response.data; // Armazena os IDs dos alunos
-          this.checkIfStudentHasJoined();
-        }).catch((error) => {
-          console.log(error);
-        })
-    }
+    Axios.getClassroomsHomeByCode(Cookies.getId())
+    .then((response) => {
+      this.classrooms = response.data;
+      for (let i = 0; i < this.classrooms.length; i++) {
+        console.log(this.classrooms[i].codigo + "===" + this.classroom.codigo);
+        if (this.classrooms[i].codigo === this.classroom.codigo) {
+          this.hasJoined = true; // Se encontrar, retorna verdadeiro
+        }
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
   },
   methods: {
-    checkIfStudentHasJoined() {
-      this.alunosIds.forEach((id) => {
-        if (id === Cookies.getId()) {
-          console.log(id + " - " + Cookies.getId());
-          this.hasJoined = true;
-        }
-      });
-    },
-    deleteClass() {
+      deleteClass() {
       Axios.deleteClassroom(this.classroom.codigo).then((response) => {
         if (response.status === 204) {
-          NotificationService.success("Turma deletada com sucesso!");
           this.$router.push({ name: "educatorClasses" });
+          NotificationService.success("Turma deletada com sucesso!");
           // Atualize a lista de turmas ou redirecione o usuário
         }
       }).catch((error) => {

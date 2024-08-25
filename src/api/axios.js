@@ -41,6 +41,14 @@ export default {
       }
     });
   },
+  getClassroomsDestaque(){
+    const token = CookiesService.getToken();
+    return apiClient.get('/turma/destaque', {
+      headers: {
+        Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
+      }
+    });
+  },
 
   updateUser(user, role) {
     const token = CookiesService.getToken();
@@ -85,6 +93,12 @@ export default {
       role: userData.role,
       especialidade: userData.especialidade
     });
+  },
+
+  updateStatusTurma(classroomId, status){
+    const token = CookiesService.getToken();
+    console.log(status);
+    return apiClient.put(`/turma/${classroomId}/status`, { status: status });
   },
 
   getUser(id, role){

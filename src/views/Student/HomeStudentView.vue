@@ -34,7 +34,17 @@ import MenuBar from "@/components/MenuBar.vue";
           </section>
           <section class="m-4">
             <h2 class="h4 fw-semibold mb-3">Destaques</h2>
-            <span>Em breve</span>
+            <div class="row g-3">
+              <span v-if="classroomsDestaque.length === 0">Não há turma em destaque.</span>
+              <div
+                v-else
+                class="col-md-6 col-lg-4"
+                v-for="classroomsDestaque in classroomsDestaque"
+                :key="classroomsDestaque.codigo"
+              >
+                <CardClass :classroom="classroomsDestaque" :statusColor="getStatusClass(classroomsDestaque.status)"/>
+              </div>
+            </div>
           </section>
           <footer class="bg-black text-white text-center py-2 text-muted mt-5">
             <p class="mb-0">&copy; 2024 Institucional. All rights reserved.</p>
@@ -46,7 +56,7 @@ import MenuBar from "@/components/MenuBar.vue";
 </template>
 
 <script>
-import axios from "@/api/axios.js";
+import axiosService from "@/api/axios.js";
 import cookiesService from "@/service/CookiesService.js";
 
 export default {
@@ -54,20 +64,30 @@ export default {
     return {
       student: cookiesService.getName(),
       classrooms: [],
+      classroomsDestaque: [],
     };
   },
   mounted() {
-    axios.getClassroomsHomeByCode(cookiesService.getId())
+    axiosService.getClassroomsHomeByCode(cookiesService.getId())
     .then((response) => {
       this.classrooms = response.data;
       console.log(this.classrooms);
     }).catch((error) => {
       console.log(error);
     });
+    this.getClassroomDestaque();
   },
   methods: {
     getStatusClass(status) {
       return `bg-${status.toLowerCase()}`;
+    },
+    getClassroomDestaque() {
+      axiosService.getClassroomsDestaque().then((response) => {
+        console.log("Destaque" + response.data);
+        this.classroomsDestaque = response.data;
+      }).catch((error) => {
+        console.log(error);
+      })
     },
   },
 };

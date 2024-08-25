@@ -7,13 +7,16 @@ import CardClass from "@/components/classroom/ClassroomCard.vue";
   <div class="flex-grow-1 p-4">
     <div class="mb-4 d-flex align-items-center justify-content-between">
       <h1 class="h3">Classes</h1>
-      
       <button v-if="role === 'educator'" @click="createClassroom" class="btn btn-solicitar text-white">Cadastrar turma</button>
     </div>
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
       <!-- Example card item -->
+       <div v-if="classrooms.length === 0">
+        <span class="text-white">Nenhuma turma encontrada.</span>
+       </div>
       <div
+          v-else
           class="col-md-6 col-lg-4"
           v-for="classroom in classrooms"
           :key="classroom.codigo"

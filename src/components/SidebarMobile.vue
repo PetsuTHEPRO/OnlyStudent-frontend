@@ -10,36 +10,66 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-dark">
       <li>
-        <a class="dropdown-item {{ isActive('home') }}" href="/home">
+        <router-link class="dropdown-item" :class="[{ 'active': isActive('') }]" :to="{name: 'educator'}">
           <i class="bi bi-house-door"></i> Home
-        </a>
+        </router-link>
       </li>
       <li>
-        <a class="dropdown-item {{ isActive('profile') }}" href="/profile">
+        <router-link class="dropdown-item" :class="[{ 'active': isActive('/profile') }]" :to="{ name: 'profileEducator' }">
           <i class="bi bi-person"></i> Profile
-        </a>
+        </router-link>
       </li>
       <li>
-        <a
-          class="dropdown-item {{ isActive('minhas-turmas') }}"
-          href="/minhas-turmas"
+        <router-link
+          class="dropdown-item"
+          :class="[{ 'active': isActive('/classes') }]"
+          :to="{name: 'educatorClasses'}"
         >
           <i class="bi bi-book"></i> Minhas Turmas
-        </a>
+        </router-link>
       </li>
       <li>
-        <a class="dropdown-item {{ isActive('suporte') }}" href="/suporte">
+        <router-link class="dropdown-item"
+          :class="[{ 'active': isActive('/support') }]"
+          :to="{name: 'support'}">
           <i class="bi bi-question-circle"></i> Suporte
-        </a>
+        </router-link>
       </li>
       <li>
         <hr class="dropdown-divider" />
       </li>
       <li>
-        <a class="dropdown-item" href="/logout">
+        <button class="dropdown-item" @click="sair()">
           <i class="bi bi-box-arrow-right"></i> Logout
-        </a>
+        </button>
       </li>
     </ul>
   </div>
 </template>
+
+<script>
+import { mapActions } from "vuex";
+
+export default {
+  methods: {
+    ...mapActions(['logout']),
+    isActive(route) {
+      const path = this.$route.path;
+      return this.$route.path === '/educator' + route;
+    },
+    sair() {
+      this.logout();
+      this.$router.push({ name: "login" });
+    }
+  }
+}
+</script>
+
+<style>
+/* Estilo para o item ativo */
+.active {
+  background-color: #0d6efd; /* Cor de fundo quando o item está ativo */
+  color: white; /* Cor do texto quando o item está ativo */
+}
+
+</style>

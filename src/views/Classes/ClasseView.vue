@@ -1,7 +1,7 @@
 <script setup>
-import ClassroomDetails from "../../components/classroom/ClassroomDetails.vue";
-import MenuBar from "../../components/MenuBar.vue";
-import SideBar from "../../components/SideBar.vue";
+import ClassroomDetails from "@/components/classroom/ClassroomDetails.vue";
+import MenuBar from "@/components/MenuBar.vue";
+import SideBar from "@/components/SideBar.vue";
 </script>
 
 <template>
@@ -26,15 +26,6 @@ h1,
 h2,
 h5 {
   color: white;
-}
-
-.bg-educator{
-  background-color: #121214 !important;
-}
-
-.bg-purple {
-  background-color: #131212 !important;
-  border-right: 2px solid #424141 !important;
 }
 
 </style>
