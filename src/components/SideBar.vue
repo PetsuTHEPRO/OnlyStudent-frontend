@@ -1,5 +1,5 @@
 <template>
-  <nav :class="['sidebar', { 'sidebar-closed': !isOpen }]">
+  <nav :class="['sidebar d-none d-md-block', { 'sidebar-closed': !isOpen }]">
     <div class="d-flex flex-column align-items-center p-0">
       <div class="d-flex w-100 align-items-center justify-content-around py-4">
         <h3 :class="['fw-bold fs-5', { 'd-none': !isOpen }]">Only Study</h3>
@@ -90,43 +90,4 @@ export default {
   font-size: 1.5rem;
 }
 
-/* Media query para dispositivos móveis */
-@media (max-width: 768px) {
-  
-  .btn-sidebar{
-    width: 30px;
-    height: 30px;
-    border-radius: 25%;
-    border: none;
-    color: white;
-    background-color: #111;
-  }
-
-  .sidebar {
-    width: 35%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1050;
-    transform: translateX(0%);
-    transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
-  }
-
-  .sidebar.sidebar-closed {
-    transform: translateX(0%);
-  }
-
-  .sidebar-open {
-    transform: translateX(0);
-  }
-
-  .sidebar-closed {
-    width: 70px;
-  }
-
-  .sidebar .bi {
-    font-size: 1.2rem;
-  }
-}
 </style>

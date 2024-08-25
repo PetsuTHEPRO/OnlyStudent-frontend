@@ -1,8 +1,13 @@
+<script setup>
+import SidebarMobile from "@/components/SidebarMobile.vue";
+</script>
+
 <template>
   <header
     class="d-flex align-items-center justify-content-between bg-black px-4 py-2 mb-5 border-bottom border-top border-2 border-purple"
   >
     <div class="d-flex align-items-center">
+      <SidebarMobile />
       <span class="d-none d-lg-block h4 fw-bold mb-0 text-white">Institucional</span>
       <div
         class="ms-3 px-3 py-1 rounded-pill bg-success text-white text-xs fw-medium"
