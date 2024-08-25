@@ -9,7 +9,7 @@ import CardClass from "@/components/classroom/ClassroomCard.vue";
     <SideBar />
     <div class="container-fluid margin-mobile p-0">
       <MenuBar role="Professor" />
-      <main class="p-4 min-vh-100">
+      <main class="p-4 min-vh-100 max-vw-100">
         <header class="d-flex align-items-center justify-content-between mb-4">
           <h1 class="h3 fw-bold">Olá, {{ educator }}</h1>
         </header>
@@ -19,7 +19,7 @@ import CardClass from "@/components/classroom/ClassroomCard.vue";
             <span v-if="classrooms.length === 0">Não há turmas, crie uma.</span>
             <div
               v-else
-              class="col-md-6 col-lg-4"
+              class="col-12 col-md-6 col-lg-4"
               v-for="classroom in classrooms"
               :key="classroom.codigo"
             >
@@ -89,6 +89,10 @@ export default {
 @media (max-width: 768px) {
 .margin-mobile{
   margin-left: 70px;
+}
+
+.max-vw-100{
+  width: calc(100vw - 80px);
 }
 }
 </style>

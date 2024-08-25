@@ -15,11 +15,16 @@
           </router-link>
         </li>
       </ul>
+      <button @click="sair()" class="btn btn-warning">
+        <i class="bi bi-box-arrow-right"></i>
+        <span v-if="isOpen" class="ms-2">logout</span>
+      </button>
     </div>
   </nav>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import store from "@/store/index.js";
 import Cookie from "@/service/CookiesService.js";
 
@@ -33,15 +38,19 @@ export default {
         { text: 'Profile', icon: 'bi bi-person', rota: 'profile' },
         { text: 'Classes', icon: 'bi bi-book', rota: 'classes' },
         { text: 'Support', icon: 'bi bi-question-circle', rota: 'support' },
-        { text: 'Logout', icon: 'bi bi-box-arrow-right', rota: 'logout' },
       ],
     };
   },
   methods: {
+    ...mapActions(["logout"]),
     toggleSidebar() {
       store.state.isSidebarOpen = !store.state.isSidebarOpen;
       this.isOpen = store.state.isSidebarOpen;
       console.log(this.isOpen);
+    },
+    sair() {
+      this.logout();
+      this.$router.go({ name: "home" });
     },
   },
 };
