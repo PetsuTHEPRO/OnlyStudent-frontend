@@ -21,7 +21,7 @@ import StatusModal from "@/components/StatusTurmaModal.vue";
       <button
         @click="viewClassroom(classroom.codigo)"
         :class="['btn rounded-circle', (!hasJoined)? 'btn-secondary' : 'btn-outline-light']"
-        :disabled="!hasJoined"
+        :disabled="!hasJoined || userRole === 'educator'"
       >
         <i class="bi bi-eye" style="font-size: 1.2rem"></i>
         <span class="visually-hidden">Visualizar</span>
