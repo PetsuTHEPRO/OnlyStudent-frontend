@@ -133,9 +133,8 @@ export default {
       error: false,
     };
   },
-  mounted() {
-    console.log(this.classroom);
-    this.getTurma(this.$route.params.id);
+  created() {
+    this.getTurma(this.$route.params.id)
   },
   methods: {
     setActiveTab(tab) {
