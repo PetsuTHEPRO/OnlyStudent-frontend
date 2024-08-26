@@ -91,8 +91,8 @@ export default {
         password: "",
       },
       rememberMe: false,
-      isLoading: false,
-      isDisabled: false,
+      isLoading: true,
+      isDisabled: true,
     };
   },
   methods: {
