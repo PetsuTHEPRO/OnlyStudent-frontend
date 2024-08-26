@@ -48,14 +48,20 @@
 </template>
 
 <script>
+import CookiesService from "@/service/CookiesService";
 import { mapActions } from "vuex";
 
 export default {
+  data() {
+    return {
+      role: CookiesService.getRole()
+    };
+  },
   methods: {
     ...mapActions(['logout']),
     isActive(route) {
       const path = this.$route.path;
-      return this.$route.path === '/educator' + route;
+      return this.$route.path === '/'+ this.role + '/' + route;
     },
     sair() {
       this.logout();
