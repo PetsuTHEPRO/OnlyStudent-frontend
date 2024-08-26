@@ -15,7 +15,7 @@
         </router-link>
       </li>
       <li>
-        <router-link class="dropdown-item" :class="[{ 'active': isActive('/profile') }]" :to="{ name: 'profileEducator' }">
+        <router-link class="dropdown-item" :class="[{ 'active': isActive('/profile') }]" :to="{ name: `'profile${role.charAt(0).toUpperCase() + role.slice(1)}'` }">
           <i class="bi bi-person"></i> Profile
         </router-link>
       </li>
@@ -23,7 +23,7 @@
         <router-link
           class="dropdown-item"
           :class="[{ 'active': isActive('/classes') }]"
-          :to="{name: 'educatorClasses'}"
+          :to="{name: `'${role}Classes'`}"
         >
           <i class="bi bi-book"></i> Minhas Turmas
         </router-link>
