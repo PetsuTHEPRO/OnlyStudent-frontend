@@ -7,7 +7,7 @@ import Classes from "@/components/classroom/ClassroomList.vue";
 <template>
   <div class="container-fluid d-flex classes-view p-0">
       <SideBar />
-      <div class="container-fluid margin-mobile p-0">
+      <div class="container-fluid p-0">
       <MenuBar :role="getRole()" />
       <Classes />
     </div>
@@ -39,13 +39,6 @@ export default {
 .classes-view{
   background-color: #1A001A;
   min-height: 100vh;
-}
-
-/* Media query para dispositivos móveis */
-@media (max-width: 768px) {
-.margin-mobile{
-  margin-left: 70px;
-}
 }
 
 </style>
