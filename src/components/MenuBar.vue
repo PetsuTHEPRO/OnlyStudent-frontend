@@ -11,13 +11,13 @@ import SearchBar from "@/components/SearchBar.vue";
       <SidebarMobile />
       <span class="d-none d-lg-block h4 fw-bold mb-0 text-white">Institucional</span>
       <div
-        class="ms-3 px-3 py-1 rounded-pill bg-success text-white text-xs fw-medium"
+        class="d-none d-lg-block ms-3 px-3 py-1 rounded-pill bg-success text-white text-xs fw-medium"
       >
         {{ role }}
       </div>
     </div>
 
-    <div class="d-flex align-items-center">
+    <div class="d-none d-lg-block d-flex align-items-center">
       <SearchBar :role="role"/>
       <span class="bg-warning text-black px-2 py-1 rounded-pill">
         R$ {{ saldo }}

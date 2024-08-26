@@ -99,9 +99,14 @@ export default {
     ...mapActions(["login"]),
     entrar() {
 
-      if(this.isLoading || this.isDisabled) return;
+      if(this.isDisabled || this.isLoading) {
+        console.log("Entrando...");
+      }else{
       this.isLoading = true;
       this.isDisabled = true;
+
+      console.log(this.isLoading);
+      console.log(this.isDisabled);
       // Make a request to the backend API to verify the login credentials
       axios
         .loginUser(this.user)
@@ -120,6 +125,8 @@ export default {
           this.$router.push({
             name: role === "student" ? "student" : "educator",
           });
+          this.isLoading = false;
+          this.isDisabled = false;
         })
         .catch((error) => {
           // Handle login error response
@@ -133,8 +140,7 @@ export default {
             );
           }
         });
-      this.isLoading = false;
-      this.isDisabled = false;
+      }
     },
   },
 };
