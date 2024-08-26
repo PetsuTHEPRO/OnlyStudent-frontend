@@ -17,9 +17,9 @@ import SearchBar from "@/components/SearchBar.vue";
       </div>
     </div>
 
-    <div class="d-none d-lg-block d-flex align-items-center">
+    <div class="d-flex align-items-center">
       <SearchBar :role="role"/>
-      <span class="bg-warning text-black px-2 py-1 rounded-pill">
+      <span class="d-none d-lg-block bg-warning text-black px-2 py-1 rounded-pill">
         R$ {{ saldo }}
       </span>
       <button
