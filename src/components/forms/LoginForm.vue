@@ -1,5 +1,7 @@
 <template>
-  <main class="d-flex align-items-center justify-content-center p-3 text-center card-login">
+  <main
+    class="d-flex align-items-center justify-content-center p-3 text-center card-login"
+  >
     <div class="mw-md w-100">
       <h2 class="fs-5 font-bold">
         Faça login para continuar sua jornada de aprendizado
@@ -7,7 +9,9 @@
       <form @submit.prevent="entrar">
         <div class="mt-4">
           <div class="mb-3">
-            <label for="email" class="d-block fw-medium fs-sm text-white">Insira seu e-mail</label>
+            <label for="email" class="d-block fw-medium fs-sm text-white"
+              >Insira seu e-mail</label
+            >
             <div class="mt-1">
               <input
                 id="email"
@@ -20,7 +24,9 @@
             </div>
           </div>
           <div class="mb-3">
-            <label for="password" class="d-block text-white fw-medium fs-sm">Insira sua senha</label>
+            <label for="password" class="d-block text-white fw-medium fs-sm"
+              >Insira sua senha</label
+            >
             <div class="mt-1">
               <input
                 id="password"
@@ -36,19 +42,30 @@
         </div>
         <div class="d-flex align-items-center justify-content-between mt-3">
           <div class="d-flex align-items-center border rounded p-2">
-            <label for="remember-me" class="mx-2 text-sm text-white">Salvar senha</label>
+            <label for="remember-me" class="mx-2 text-sm text-white"
+              >Salvar senha</label
+            >
             <input id="remember-me" v-model="rememberMe" type="checkbox" />
           </div>
           <div class="text-sm">
-            <router-link to="#" class="font-medium text-purple text-decoration-none fw-bolder">Esqueceu sua senha?</router-link>
+            <router-link
+              to="#"
+              class="font-medium text-purple text-decoration-none fw-bolder"
+              >Esqueceu sua senha?</router-link
+            >
           </div>
         </div>
         <div class="d-flex align-items-center justify-content-center mt-4 mb-4">
           <button
             type="submit"
             class="btn btn-primary w-100 px-4 py-2 mt-3 text-sm font-medium text-white rounded shadow-sm"
+            :disabled="isDisabled"
           >
-            CONFIRMAR
+            <span v-if="isLoading">
+              <i class="spinner-border spinner-border-sm" role="status"></i>
+              Enviando...
+            </span>
+            <span v-else> CONFIRMAR </span>
           </button>
         </div>
         <div class="d-flex align-items-center">
@@ -63,31 +80,44 @@
 
 <script>
 import axios from "../../api/axios.js";
-import notificationService from '../../service/notificationService.js'
-import { mapActions } from 'vuex';
+import notificationService from "../../service/notificationService.js";
+import { mapActions } from "vuex";
 
 export default {
   data() {
     return {
       user: {
-        email: '',
-        password: '',
+        email: "",
+        password: "",
       },
       rememberMe: false,
+      isLoading: false,
+      isDisabled: false,
     };
   },
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(["login"]),
     entrar() {
+      this.isLoading = true;
+      this.isDisabled = true;
       // Make a request to the backend API to verify the login credentials
-      axios.loginUser(this.user)
+      axios
+        .loginUser(this.user)
         .then((response) => {
           // Handle successful login response
           const { token, email, role, name, id } = response.data;
-          
-          this.login({ token: token, email: email, role: role, name: name, id: id });
+
+          this.login({
+            token: token,
+            email: email,
+            role: role,
+            name: name,
+            id: id,
+          });
           notificationService.success("Bem vindo!");
-          this.$router.push({ name: role === "student" ? "student" : "educator" });
+          this.$router.push({
+            name: role === "student" ? "student" : "educator",
+          });
         })
         .catch((error) => {
           // Handle login error response
@@ -95,18 +125,20 @@ export default {
             // O servidor respondeu com um status fora do intervalo 2xx
             notificationService.error(error.response.data);
             console.log(error);
-          }else{ 
-            notificationService.error("Servidor Offline, entre em contato a equipe técnica!");
+          } else {
+            notificationService.error(
+              "Servidor Offline, entre em contato a equipe técnica!"
+            );
           }
         });
+      this.isLoading = false;
+      this.isDisabled = false;
     },
   },
 };
 </script>
 
-
 <style>
-
 .card-login {
   border: 2px solid;
   border-image: linear-gradient(
@@ -124,5 +156,4 @@ export default {
   max-width: 500px;
   width: 100%;
 }
-
 </style>
