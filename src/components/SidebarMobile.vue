@@ -10,20 +10,19 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-dark">
       <li>
-        <router-link class="dropdown-item" :class="[{ 'active': isActive('') }]" :to="{name: `${role}`}">
+        <router-link class="dropdown-item" :to="{name: `${role}`}">
           <i class="bi bi-house-door"></i> Home
         </router-link>
       </li>
       <li>
-        <router-link class="dropdown-item" :class="[{ 'active': isActive('/profile') }]" :to="{ name: `'${role}Profile'` }">
+        <router-link class="dropdown-item" :to="{ name: `${role}Profile` }">
           <i class="bi bi-person"></i> Profile
         </router-link>
       </li>
       <li>
         <router-link
           class="dropdown-item"
-          :class="[{ 'active': isActive('/classes') }]"
-          :to="{name: `'${role}Classes'`}"
+          :to="{name: `${role}Classes`}"
         >
           <i class="bi bi-book"></i> Minhas Turmas
         </router-link>
