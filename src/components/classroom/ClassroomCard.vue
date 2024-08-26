@@ -20,7 +20,7 @@ import StatusModal from "@/components/StatusTurmaModal.vue";
       <!-- Botão de Visualizar (disponível para ambos Educator e Student) -->
       <button
         @click="viewClassroom(classroom.codigo)"
-        :class="['btn rounded-circle', (!hasJoined)? 'btn-secondary' : 'btn-outline-light']"
+        :class="['btn rounded-circle', (!hasJoined || userRole === 'educator')? 'btn-secondary' : 'btn-outline-light']"
         :disabled="!hasJoined || userRole === 'educator'"
       >
         <i class="bi bi-eye" style="font-size: 1.2rem"></i>
