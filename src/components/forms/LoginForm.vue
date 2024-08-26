@@ -98,6 +98,8 @@ export default {
   methods: {
     ...mapActions(["login"]),
     entrar() {
+
+      if(this.isLoading || this.isDisabled) return;
       this.isLoading = true;
       this.isDisabled = true;
       // Make a request to the backend API to verify the login credentials
