@@ -237,19 +237,20 @@ router.beforeEach((to, from, next) => {
 
 router.beforeEach(async (to, from, next) => {
   // Verifica se a rota começa com /student/ ou /educator/
-  
   if (to.path.startsWith('/student') || to.path.startsWith('/educator')) {
       // Faz uma requisição ao backend para validar o token
       
       const response = axiosService.validateToken().catch((error) => {
-        next({ name: 'logout' });
+        store.dispatch("logout"); // Dispara a ação de logout
+        next({ name: 'login' });
       });
 
       if (response.status === 200) {
         // Token válido, prossiga com a navegação
         next();
       } else {
-        next({ name: 'logout' });
+        store.dispatch("logout"); // Dispara a ação de logout
+        next({ name: 'login' });
       }
       // Token inválido ou expirado, redireciona para logout
   } else {
