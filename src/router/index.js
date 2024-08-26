@@ -237,6 +237,7 @@ router.beforeEach((to, from, next) => {
 
 router.beforeEach(async (to, from, next) => {
   // Verifica se a rota começa com /student/ ou /educator/
+  console.log(to.path);
   if (to.path.startsWith('/student/') || to.path.startsWith('/educator/')) {
       // Faz uma requisição ao backend para validar o token
       const response = axiosService.validateToken();
