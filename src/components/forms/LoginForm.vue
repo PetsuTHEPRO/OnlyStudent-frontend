@@ -65,7 +65,7 @@
               <i class="spinner-border spinner-border-sm" role="status"></i>
               Enviando...
             </span>
-            <span v-else> CONFIRMAR </span>
+            <span v-else> ENTRAR </span>
           </button>
         </div>
         <div class="d-flex align-items-center">
@@ -91,8 +91,8 @@ export default {
         password: "",
       },
       rememberMe: false,
-      isLoading: true,
-      isDisabled: true,
+      isLoading: false,
+      isDisabled: false,
     };
   },
   methods: {
