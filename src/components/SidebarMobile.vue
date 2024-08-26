@@ -10,7 +10,7 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-dark">
       <li>
-        <router-link class="dropdown-item" :class="[{ 'active': isActive('') }]" :to="{name: 'educator'}">
+        <router-link class="dropdown-item" :class="[{ 'active': isActive('') }]" :to="{name: `${role}`}">
           <i class="bi bi-house-door"></i> Home
         </router-link>
       </li>
