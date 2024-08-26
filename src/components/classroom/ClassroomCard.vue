@@ -102,7 +102,6 @@ export default {
     .then((response) => {
       this.classrooms = response.data;
       for (let i = 0; i < this.classrooms.length; i++) {
-        console.log(this.classrooms[i].codigo + "===" + this.classroom.codigo);
         if (this.classrooms[i].codigo === this.classroom.codigo) {
           this.hasJoined = true; // Se encontrar, retorna verdadeiro
         }

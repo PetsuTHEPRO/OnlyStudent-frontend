@@ -1,5 +1,6 @@
 <script setup>
 import SidebarMobile from "@/components/SidebarMobile.vue";
+import SearchBar from "@/components/SearchBar.vue";
 </script>
 
 <template>
@@ -17,26 +18,7 @@ import SidebarMobile from "@/components/SidebarMobile.vue";
     </div>
 
     <div class="d-flex align-items-center">
-      <div
-        v-if="role !== 'Professor'"
-        class="border border-2 p-1 me-3 d-none d-lg-block"
-        style="border-radius: 16px"
-      >
-        <input
-          type="text"
-          class="bg-preto border border-0 text-white no-focus"
-          placeholder="Pesquisar cursos..."
-          aria-label="Pesquisar cursos..."
-          aria-describedby="button-addon2"
-        />
-        <button
-          class="bi bi-search text-white bg-preto border-0 me-2"
-          type="button"
-          id="button-addon2"
-          @click="search"
-        ></button>
-      </div>
-
+      <SearchBar :role="role"/>
       <span class="bg-warning text-black px-2 py-1 rounded-pill">
         R$ {{ saldo }}
       </span>
@@ -58,8 +40,8 @@ import SidebarMobile from "@/components/SidebarMobile.vue";
 
 <script>
 import CookiesService from "@/service/CookiesService";
-import notificationService from "@/service/notificationService";
 import store from "@/store/index.js";
+import axiosService from "@/api/axios.js";
 
 export default {
   name: "MenuBar",
@@ -70,15 +52,13 @@ export default {
     return {
       saldo: 0,
       name: CookiesService.getName(),
+      search: "",
     };
   },
   methods: {
     openMenu() {
       store.state.isSidebarOpen = !store.state.isSidebarOpen;
       console.log(store.state.isSidebarOpen);
-    },
-    search() {
-      notificationService.info("Em desenvolvimento.");
     },
   },
 };

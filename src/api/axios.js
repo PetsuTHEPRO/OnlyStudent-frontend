@@ -12,6 +12,25 @@ const apiClient = axios.create({
 export default {
 
   // Comando de GET - Banco de Dados
+
+  validateToken() {
+    const token = CookiesService.getToken();
+    return apiClient.get('/token/validate', {
+      headers: {
+        Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
+      }
+    });
+  },
+  getAllClassrooms(search, page, size) {
+    const token = CookiesService.getToken();
+    return apiClient.get('/turma/allClassroom', {
+      params: { search: search, page: page, size: size },
+      headers: {
+        Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
+      }
+    });
+  },
+
   findIdEducatorByEducatorEmail(email){
     const token = CookiesService.getToken();
     return apiClient.get('/educator/idByEmail', {
@@ -44,6 +63,16 @@ export default {
   getClassroomsDestaque(){
     const token = CookiesService.getToken();
     return apiClient.get('/turma/destaque', {
+      headers: {
+        Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
+      }
+    });
+  },
+
+  getNameTurmas(search){
+    const token = CookiesService.getToken();
+    return apiClient.get('/turma/search', {
+      params: { search: search },
       headers: {
         Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
       }
@@ -102,8 +131,12 @@ export default {
   },
 
   getUser(id, role){
+    const token = CookiesService.getToken();
     return apiClient.get(`/${role}/atualUser`, {
-      params: { id: id } // Parâmetro de consulta
+      params: { id: id },
+      headers: {
+        Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
+      }
     });
   },
 

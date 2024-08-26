@@ -117,6 +117,18 @@ const router = createRouter({
       },
     },
     {
+      path: "/student/allClassrooms",
+      name: "allClassrooms",
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("@/views/Student/ClassesResultView.vue"),
+      meta: {
+        requiresAuth: true,
+        role: "student",
+      },
+    },
+    {
       path: "/educator/support",
       name: "support",
       // route level code-splitting
@@ -218,6 +230,24 @@ router.beforeEach((to, from, next) => {
       next();
     }
   } else {
+    next();
+  }
+});
+
+router.beforeEach(async (to, from, next) => {
+  // Verifica se a rota começa com /student/ ou /educator/
+  if (to.path.startsWith('/student/') || to.path.startsWith('/educator/')) {
+      // Faz uma requisição ao backend para validar o token
+      const response = axiosService.validateToken();
+      if (response.status === 200) {
+        // Token válido, prossiga com a navegação
+        next();
+      } else {
+        next({ name: 'logout' });
+      }
+      // Token inválido ou expirado, redireciona para logout
+  } else {
+    // Para outras rotas, prossiga normalmente
     next();
   }
 });

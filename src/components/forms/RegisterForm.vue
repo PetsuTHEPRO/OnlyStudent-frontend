@@ -107,7 +107,7 @@
         <div class="d-flex align-items-center justify-content-center mb-2">
           <button
             type="submit"
-            class="d-flex justify-content-center px-4 py-2 mt-4 text-sm font-medium text-white rounded-md shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+            class="btn btn-primary d-flex justify-content-center px-4 py-2 mt-4 text-sm font-medium text-white"
           >
             CONFIRMAR
           </button>
@@ -222,17 +222,6 @@ export default {
 </script>
 
 <style>
-button {
-  background-color: #4f0f4c;
-  border-radius: 12px;
-  border: none;
-  color: white;
-  font-weight: bolder;
-}
-
-button:hover {
-  background-color: #9747ff;
-}
 
 input[type="checkbox"] {
   background-color: #000 !important;
@@ -248,10 +237,6 @@ input[type="checkbox"] {
 
 .min-h-screen {
   min-height: 100vh;
-}
-
-.bg-purple {
-  background-color: #1a001a;
 }
 
 .card-login {
