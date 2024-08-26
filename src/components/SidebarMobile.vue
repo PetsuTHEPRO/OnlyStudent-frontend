@@ -15,7 +15,7 @@
         </router-link>
       </li>
       <li>
-        <router-link class="dropdown-item" :class="[{ 'active': isActive('/profile') }]" :to="{ name: `'profile${role.charAt(0).toUpperCase() + role.slice(1)}'` }">
+        <router-link class="dropdown-item" :class="[{ 'active': isActive('/profile') }]" :to="{ name: `'${role}Profile'` }">
           <i class="bi bi-person"></i> Profile
         </router-link>
       </li>
