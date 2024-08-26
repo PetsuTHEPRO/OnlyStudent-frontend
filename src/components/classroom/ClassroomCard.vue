@@ -18,13 +18,14 @@ import StatusModal from "@/components/StatusTurmaModal.vue";
     </div>
     <div class="card-footer d-flex justify-content-between">
       <!-- Botão de Visualizar (disponível para ambos Educator e Student) -->
-      <router-link
-        :to="{ name: 'classroom', params: { id: classroom.codigo } }"
-        class="btn btn-outline-light rounded-circle"
+      <button
+        @click="viewClassroom(classroom.codigo)"
+        :class="['btn rounded-circle', (!hasJoined)? 'btn-secondary' : 'btn-outline-light']"
+        :disabled="!hasJoined"
       >
         <i class="bi bi-eye" style="font-size: 1.2rem"></i>
         <span class="visually-hidden">Visualizar</span>
-      </router-link>
+    </button>
 
       <!-- Botões específicos para Educator -->
       <template v-if="userRole === 'educator'">
@@ -44,7 +45,7 @@ import StatusModal from "@/components/StatusTurmaModal.vue";
           :class="[
             'btn',
             'rounded-circle',
-            hasJoined ? 'btn-secondary' : 'btn-outline-light',
+            (hasJoined && userRole === 'student')? 'btn-secondary' : 'btn-outline-light',
           ]"
           :disabled="hasJoined"
         >
@@ -122,7 +123,15 @@ export default {
         console.log(error);
         NotificationService.error("Erro ao deletar turma!");
       })
-    }
+    },
+
+    viewClassroom(classroomId) {
+      // Retorna o objeto de configuração da rota
+      this.$router.push({
+        name: `${this.userRole}Classroom`, // Nome da rota baseado no papel do usuário
+        params: { id: classroomId }        // Parâmetros da rota, neste caso o ID da turma
+      });
+    },
   },
 };
 </script>

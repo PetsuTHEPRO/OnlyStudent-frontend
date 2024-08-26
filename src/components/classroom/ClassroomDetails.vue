@@ -84,7 +84,7 @@ import MaterialIcon from "@/components/MaterialIcon.vue";
         >
           <div class="d-flex justify-content-between">
             <h3 class="h6 fw-semibold text-white">Materials</h3>
-            <button class="btn btn-primary btn-sm" @click="showModal = true">
+            <button class="btn btn-primary btn-sm" @click="showModal = true" v-if="userRole === 'educator'">
               Add Material
             </button>
           </div>

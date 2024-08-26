@@ -8,7 +8,7 @@ import SideBar from "@/components/SideBar.vue";
   <div class="container-fluid d-flex classe-list-view p-0" :class="theme">
       <SideBar />
       <div class="container-fluid margin-mobile p-0">
-        <MenuBar role="Professor" />
+        <MenuBar :role="role" />
         <ClassroomDetails />
       </div>
     </div>
@@ -20,6 +20,7 @@ export default {
   data() {
     return {
       theme: cookieService.getTheme(),
+      role: cookieService.getRole() === "educator" ? "Professor" : "Estudante",
     };
   },
 };

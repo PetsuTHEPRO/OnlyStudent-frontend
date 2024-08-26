@@ -72,7 +72,6 @@
         '$route.query.search'(newSearch) {
             this.query = newSearch || '';
             this.searchClassrooms();
-            console.log("entrou gostoso");
         }
     },
     methods: {
@@ -88,8 +87,6 @@
       searchClassrooms() {
         axiosService.getNameTurmas(this.query).then((response) => {
             this.classrooms = response.data;
-            console.log(this.classrooms);
-            console.log(this.filteredClasses());
         }).catch((error) => {
             console.log(error);
         });

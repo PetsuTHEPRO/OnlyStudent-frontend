@@ -65,7 +65,7 @@ export default {
     },
     toggleTheme() {
       CookiesService.toggleTheme();
-      this.$router.go();
+      window.location.reload();
     },
   },
 };

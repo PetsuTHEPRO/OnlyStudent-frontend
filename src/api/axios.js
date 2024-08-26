@@ -173,19 +173,27 @@ export default {
 
   getClassroomById(id) {
     const token = CookiesService.getToken();
-    return apiClient.get(`/turma/${id}`, {headers: { Authorization: `Bearer ${token}` }});
+    return apiClient.get(`/turma/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   },
 
   getMaterialsByClassroomCode(codigo) {
-    return apiClient.get(`/turma/${codigo}/materials`);
+    return apiClient.get(`/turma/${codigo}/materials`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   },
 
   setMaterialsByClassroomCode(materials) {
-    return apiClient.post(`/material/register`, materials);
+    return apiClient.post(`/material/register`, materials, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   },
 
   sendEmail(support) {
     const token = CookiesService.getToken();
-    return apiClient.post(`/support/send`, support, {headers: { Authorization: `Bearer ${token}` }});
+    return apiClient.post(`/support/send`, support, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   },
 };

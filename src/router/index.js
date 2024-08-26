@@ -155,7 +155,7 @@ const router = createRouter({
     },
     {
       path: "/educator/classroom/:id",
-      name: "classroom",
+      name: "educatorClassroom",
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -168,7 +168,7 @@ const router = createRouter({
 
     {
       path: "/student/classroom/:id",
-      name: "classroomStudent",
+      name: "studentClassroom",
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -248,12 +248,12 @@ router.beforeEach(async (to, from, next) => {
       } else {
         // Token inválido ou expirado, redireciona para logout
         store.dispatch("logout"); // Dispara a ação de logout
-        next({ name: 'logout' });
+        window.location.reload();
       }
     } catch (error) {
       // Em caso de erro, assume que o token é inválido ou expirado
       store.dispatch("logout"); // Dispara a ação de logout
-      next({ name: 'logout' });
+      window.location.reload();
     }
   } else {
     // Para outras rotas, prossiga normalmente
