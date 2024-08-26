@@ -26,8 +26,9 @@ import SideBar from "@/components/SideBar.vue";
 
 /* Media query para dispositivos móveis */
 @media (max-width: 768px) {
-.margin-mobile{
-  margin-left: 70px;
+
+.max-vw-100{
+  width: calc(100vw - 80px);
 }
 }
 </style>

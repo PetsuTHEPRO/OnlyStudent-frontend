@@ -7,7 +7,7 @@ import CardSuport from "@/components/SupportRequest.vue";
 <template>
   <div class="container-fluid d-flex classes-view p-0">
     <SideBar />
-    <div class="container-fluid margin-mobile p-0">
+    <div class="container-fluid p-0">
       <MenuBar :role="getRole()" />
       <CardSuport />
     </div>
@@ -40,10 +40,4 @@ export default {
   min-height: 100vh;
 }
 
-/* Media query para dispositivos móveis */
-@media (max-width: 768px) {
-  .margin-mobile {
-    margin-left: 70px;
-  }
-}
 </style>
