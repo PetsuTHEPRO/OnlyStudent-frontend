@@ -12,7 +12,7 @@ import MaterialIcon from "@/components/MaterialIcon.vue";
     <!-- Verifica se os dados da turma estão disponíveis -->
     <div v-else>
       <h2 class="h4 fw-bold text-white">{{ classroom.name }}</h2>
-      <p class="small text-white">Instructor: {{ educatorName }}</p>
+      <p class="small text-white">Instructor: {{ classroom.educator }}</p>
       <div class="my-4 border-top separator"></div>
 
       <ul class="nav nav-tabs separator">
@@ -53,20 +53,20 @@ import MaterialIcon from "@/components/MaterialIcon.vue";
           <h3 class="h6 fw-semibold text-white">Students</h3>
           <ul class="list-unstyled">
             <!-- Verifica se a lista de alunos está vazia -->
-            <template v-if="classroom.totalAlunos === 0">
+            <template v-if="classroom.nomeAlunos">
               <li class="text-muted text-white">No students available</li>
             </template>
-            <!-- Lista os alunos se existirem -->
             <template v-else>
               <li
-                v-for="aluno in students"
+                v-for="aluno in classroom.nomeAlunos"
                 :key="aluno.id"
                 class="d-flex align-items-center mb-2 text-white"
               >
                 <i class="bi bi-person me-2 text-white" style="font-size: 1.5rem"></i>
-                <span class="text-white">{{ aluno.name }}</span>
+                <span class="text-white">{{ aluno }}</span>
               </li>
             </template>
+            
           </ul>
         </div>
 
@@ -90,13 +90,13 @@ import MaterialIcon from "@/components/MaterialIcon.vue";
           </div>
           <ul class="list-unstyled">
             <!-- Verifica se a lista de materiais está vazia -->
-            <template v-if="classroom.totalMateriais === 0">
+            <template v-if="classroom.materiais === null || classroom.materiais === undefined">
               <li class="text-muted text-white">No materials available</li>
             </template>
             <!-- Lista os materiais se existirem -->
             <template v-else>
               <li
-                v-for="material in materials"
+                v-for="material in classroom.materiais"
                 :key="material.id"
                 class="d-flex align-items-center mb-2"
               >
@@ -128,27 +128,25 @@ export default {
   data() {
     return {
       classroom: [],
-      students: [],
-      materials: [],
-      educatorName: "",
       showModal: false, // Controla a visibilidade do modal
       activeTab: "students",
       error: false,
     };
   },
-  created() {
-    this.atualizarMaterial();
-    this.atualizarAlunos();
+  mounted() {
+    console.log(this.classroom);
+    this.getTurma(this.$route.params.id);
   },
   methods: {
     setActiveTab(tab) {
       this.activeTab = tab;
     },
-    getMaterialsByClassroomCode(codigo) {
-      this.materials = axios
-        .getMaterialsByClassroomCode(codigo)
+    getTurma(codigo) {
+        axios
+        .getClassroomById(codigo)
         .then((response) => {
-          this.materials = response.data;
+          this.classroom = response.data;
+          console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -170,30 +168,6 @@ export default {
       // Aqui você pode enviar o material para o servidor
     },
 
-    atualizarMaterial() {
-      this.classroom = axios
-        .getClassroomById(this.$route.params.id)
-        .then((response) => {
-          this.classroom = response.data;
-          this.getMaterialsByClassroomCode(this.classroom.codigo);
-          this.educatorName = this.classroom.educator.name;
-          this.students = this.classroom.alunos;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-
-    atualizarAlunos() {
-      this.classroom = axios
-        .getIdsAlunos(this.$route.params.id)
-        .then((response) => {
-          this.students = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
   },
 };
 </script>
@@ -211,5 +185,9 @@ export default {
 .nav-tabs .nav-link:hover {
   background-color: #9747ff !important;
   border-color: #9747ff !important;
+}
+
+.active{
+  background-color: rgba(255, 255, 255, 0) !important;
 }
 </style>

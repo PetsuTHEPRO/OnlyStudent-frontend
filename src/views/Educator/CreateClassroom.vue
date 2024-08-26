@@ -4,53 +4,53 @@ import SideBar from "@/components/SideBar.vue";
 </script>
 
 <template>
-  <div class="row bg-classroom min-vh-100 bg-educator">
-    <div class="col-md-2 bg-purple">
-      <SideBar />
-    </div>
-    <div class="col-md-10 ps-0">
-      <MenuBar role="Professor" />
-      <div class="mx-5 d-flex flex-column align-items-center">
-        <h1>Cadastrar Turma</h1>
-        <p>Crie uma nova turma</p>
-        <form class="row">
-          <div class="col-md-12">
-            <label for="name" class="form-label">Nome</label>
-            <input
-              type="text"
-              v-model="classroom.name"
+  <div class="container-fluid d-flex educator-create-view p-0">
+    <SideBar />
+    <div class="container-fluid margin-mobile p-0">
+    <MenuBar role="Professor" />
+    <div class="mx-5 d-flex flex-column align-items-center">
+      <h1>Cadastrar Turma</h1>
+      <p>Crie uma nova turma</p>
+      <form class="row">
+        <div class="col-md-12">
+          <label for="name" class="form-label">Nome</label>
+          <input
+            type="text"
+            v-model="classroom.name"
+            class="form-control"
+            id="name"
+            required
+          />
+        </div>
+        <div class="col-md-12 my-3">
+          <div class="mb-3">
+            <label for="description" class="form-label">Descrição</label>
+            <textarea
+              v-model="classroom.description"
+              id="description"
               class="form-control"
-              id="name"
-              required
-            />
+              placeholder="Enter class description"
+              style="min-height: 100px"
+            ></textarea>
           </div>
-          <div class="col-md-12 my-3">
-            <div class="mb-3">
-              <label for="description" class="form-label">Descrição</label>
-              <textarea
-                v-model="classroom.description"
-                id="description"
-                class="form-control"
-                placeholder="Enter class description"
-                style="min-height: 100px"
-              ></textarea>
-            </div>
-          </div>
-          <div class="col-md-2">
-            <label for="price" class="form-label">Preço</label>
-            <input
-              type="number"
-              v-model="classroom.price"
-              class="form-control"
-              id="price"
-              required
-            />
-          </div>
-        </form>
-        <button class="btn btn-primary" @click="registerClassroom">Cadastrar</button>
-      </div>
+        </div>
+        <div class="col-md-2">
+          <label for="price" class="form-label">Preço</label>
+          <input
+            type="number"
+            v-model="classroom.price"
+            class="form-control"
+            id="price"
+            required
+          />
+        </div>
+      </form>
+      <button class="btn btn-primary" @click="registerClassroom">
+        Cadastrar
+      </button>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -70,7 +70,7 @@ export default {
     };
   },
   mounted() {
-      axios
+    axios
       .findIdEducatorByEducatorEmail(Cookies.getEmail())
       .then((response) => {
         this.classroom.idEducator = response.data;
@@ -106,6 +106,12 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap");
 
+.educator-create-view{
+  background-color: #1a001a;
+  color: white;
+  min-height: 100vh;
+}
+
 .rounded {
   border-radius: 10px !important;
 }
@@ -119,30 +125,10 @@ export default {
   border-right: 2px solid #424141 !important;
 }
 
-
 input,
 textarea {
   background-color: #323232 !important;
   color: #fff !important;
-}
-
-.bg-classroom {
-  background-color: #121214;
-  color: white;
-}
-
-
-body {
-  margin: 0;
-}
-h1,
-h2,
-h5 {
-  color: white;
-}
-
-.bg-educator{
-  background-color: #121214 !important;
 }
 
 </style>

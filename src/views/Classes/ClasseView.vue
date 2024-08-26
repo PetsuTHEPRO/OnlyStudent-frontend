@@ -5,27 +5,28 @@ import SideBar from "@/components/SideBar.vue";
 </script>
 
 <template>
-  <div class="row bg-educator min-vh-100">
-    <div class="col-md-2 bg-purple">
+  <div class="container-fluid d-flex classe-list-view p-0">
       <SideBar />
+      <div class="container-fluid margin-mobile p-0">
+        <MenuBar role="Professor" />
+        <ClassroomDetails />
+      </div>
     </div>
-    <div class="col-md-10 ps-0">
-      <MenuBar role="Professor" />
-      <ClassroomDetails />
-    </div>
-  </div>
 </template>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap");
 
-body {
-  margin: 0;
-}
-h1,
-h2,
-h5 {
+.classe-list-view {
+  background-color: #1a001a;
   color: white;
+  min-height: 100vh;
 }
 
+@media (max-width: 768px) {
+
+.max-vw-100{
+  width: calc(100vw - 80px);
+}
+}
 </style>

@@ -1,8 +1,5 @@
 <template>
   <div class="d-flex flex-column mx-5 mb-5">
-    <div class="mb-4 d-flex align-items-center justify-content-between">
-      <h1 class="h3 fw-bold">Suporte</h1>
-    </div>
     <div class="card w-100 max-w-xl bg-card">
       <div class="card-header d-flex flex-column">
         <h5 class="card-title text-white">Formulário de Suporte</h5>

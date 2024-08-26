@@ -1,157 +1,179 @@
-import axios from 'axios';
-import CookiesService from '@/service/CookiesService.js';
+import axios from "axios";
+import CookiesService from "@/service/CookiesService.js";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const apiClient = axios.create({
   baseURL: apiUrl,
   headers: {
-    'Content-Type': 'application/json'
-  }
+    "Content-Type": "application/json",
+  },
 });
 
 export default {
-
   // Comando de GET - Banco de Dados
 
   validateToken() {
     const token = CookiesService.getToken();
-    return apiClient.get('/token/validate', {
+    return apiClient.get("/token/validate", {
       headers: {
-        Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
-      }
+        Authorization: `Bearer ${token}`, // Adiciona o token no cabeçalho de autorização
+      },
     });
   },
   getAllClassrooms(search, page, size) {
     const token = CookiesService.getToken();
-    return apiClient.get('/turma/allClassroom', {
+    return apiClient.get("/turma/allClassroom", {
       params: { search: search, page: page, size: size },
       headers: {
-        Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
-      }
+        Authorization: `Bearer ${token}`, // Adiciona o token no cabeçalho de autorização
+      },
     });
   },
 
-  findIdEducatorByEducatorEmail(email){
+  findIdEducatorByEducatorEmail(email) {
     const token = CookiesService.getToken();
-    return apiClient.get('/educator/idByEmail', {
+    return apiClient.get("/educator/idByEmail", {
       params: { email: email },
       headers: {
-        Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
-      }
+        Authorization: `Bearer ${token}`, // Adiciona o token no cabeçalho de autorização
+      },
     });
   },
 
-  findClassroomsByCode(codigo){
+  findClassroomsByCode(codigo) {
     const token = CookiesService.getToken();
-    return apiClient.get('/turma', {
+    return apiClient.get("/turma", {
       params: { codigo: codigo },
       headers: {
-        Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
-      }
+        Authorization: `Bearer ${token}`, // Adiciona o token no cabeçalho de autorização
+      },
     });
   },
 
-  getClassroomsHomeByCode(codigo){
+  getClassroomsHomeByCode(codigo) {
     const token = CookiesService.getToken();
-    return apiClient.get('/turma/turmasAluno', {
+    return apiClient.get("/turma/turmasAluno", {
       params: { codigo: codigo }, // Parâmetro de consulta
       headers: {
-        Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
-      }
+        Authorization: `Bearer ${token}`, // Adiciona o token no cabeçalho de autorização
+      },
     });
   },
-  getClassroomsDestaque(){
+  getClassroomsDestaque() {
     const token = CookiesService.getToken();
-    return apiClient.get('/turma/destaque', {
+    return apiClient.get("/turma/destaque", {
       headers: {
-        Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
-      }
+        Authorization: `Bearer ${token}`, // Adiciona o token no cabeçalho de autorização
+      },
     });
   },
 
-  getNameTurmas(search){
+  getNameTurmas(search) {
     const token = CookiesService.getToken();
-    return apiClient.get('/turma/search', {
+    return apiClient.get("/turma/search", {
       params: { search: search },
       headers: {
-        Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
-      }
+        Authorization: `Bearer ${token}`, // Adiciona o token no cabeçalho de autorização
+      },
     });
   },
 
   updateUser(user, role) {
     const token = CookiesService.getToken();
-    return apiClient.put(`/${role.toLowerCase()}/updateProfile?login=${user.login}`, {
-      name: user.name,
-      telefone: user.telefone,
-      especialidade: user.especialidade,
-      headers: {
-        Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
+    return apiClient.put(
+      `/${role.toLowerCase()}/updateProfile?login=${user.login}`,
+      {
+        name: user.name,
+        telefone: user.telefone,
+        especialidade: user.especialidade,
+        headers: {
+          Authorization: `Bearer ${token}`, // Adiciona o token no cabeçalho de autorização
+        },
       }
-    });
+    );
   },
 
-  loginUser(userData){
-    return apiClient.post('/auth/login', {
+  loginUser(userData) {
+    return apiClient.post("/auth/login", {
       email: userData.email,
-      password: userData.password
+      password: userData.password,
     });
   },
 
-  deleteClassroom(codigo){
-    return apiClient.delete(`/turma/${codigo}`);
+  // Comando DELETE - Banco de Dados
+  deleteClassroom(codigo) {
+    const token = CookiesService.getToken();
+    return apiClient.delete(`/turma/${codigo}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   },
-  
+
   // Comando POST - Banco de Dados
 
-  createClassroom(classroomData){
-    return apiClient.post('/turma/register', {
-      name: classroomData.name,
-      description: classroomData.description,
-      price: classroomData.price,
-      idEducator: classroomData.idEducator
-    });
+  createClassroom(classroomData) {
+    const token = CookiesService.getToken();
+    return apiClient.post(
+      "/turma/register",
+      {
+        name: classroomData.name,
+        description: classroomData.description,
+        price: classroomData.price,
+        idEducator: classroomData.idEducator,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
   },
 
-  registerUser(userData){
-    return apiClient.post('/auth/register', {
+  registerUser(userData) {
+    return apiClient.post("/auth/register", {
       name: userData.name,
       telephone: userData.telephone,
       email: userData.email,
       password: userData.password,
       role: userData.role,
-      especialidade: userData.especialidade
+      especialidade: userData.especialidade,
     });
   },
 
-  updateStatusTurma(classroomId, status){
+  updateStatusTurma(classroomId, status) {
     const token = CookiesService.getToken();
     console.log(status);
-    return apiClient.put(`/turma/${classroomId}/status`, { status: status });
+    return apiClient.put(
+      `/turma/${classroomId}/status`,
+      { status: status },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
   },
 
-  getUser(id, role){
+  getUser(id, role) {
     const token = CookiesService.getToken();
     return apiClient.get(`/${role}/atualUser`, {
       params: { id: id },
       headers: {
-        Authorization: `Bearer ${token}` // Adiciona o token no cabeçalho de autorização
-      }
+        Authorization: `Bearer ${token}`, // Adiciona o token no cabeçalho de autorização
+      },
     });
   },
 
-  getIdsAlunos(codigo){
-    return apiClient.get(`/turma/${codigo}/students/info`);
+  getIdsAlunos(codigo) {
+    const token = CookiesService.getToken();
+    return apiClient.get(`/turma/${codigo}/students/info`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   },
 
-  getClassroomByIdOfUser(codigo, page, size, role){
+  getClassroomByIdOfUser(codigo, page, size, role) {
+    const token = CookiesService.getToken();
+
     return apiClient.get(`/turma/${role}Turmas`, {
-      params: { codigo: codigo, page: page, size: size } // Parâmetro de consulta
+      params: { codigo: codigo, page: page, size: size },
+      headers: { Authorization: `Bearer ${token}` },
     });
   },
 
-  getClassroomById(id){
-    return apiClient.get(`/turma/${id}`);
+  getClassroomById(id) {
+    const token = CookiesService.getToken();
+    return apiClient.get(`/turma/${id}`, {headers: { Authorization: `Bearer ${token}` }});
   },
 
   getMaterialsByClassroomCode(codigo) {
@@ -163,7 +185,7 @@ export default {
   },
 
   sendEmail(support) {
-    return apiClient.post(`/support/send`, support);
-  }
-
-}
+    const token = CookiesService.getToken();
+    return apiClient.post(`/support/send`, support, {headers: { Authorization: `Bearer ${token}` }});
+  },
+};
