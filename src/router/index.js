@@ -240,8 +240,11 @@ router.beforeEach(async (to, from, next) => {
   
   if (to.path.startsWith('/student') || to.path.startsWith('/educator')) {
       // Faz uma requisição ao backend para validar o token
-      const response = axiosService.validateToken();
-      console.log(response);
+      
+      const response = axiosService.validateToken().catch((error) => {
+        next({ name: 'logout' });
+      });
+
       if (response.status === 200) {
         // Token válido, prossiga com a navegação
         next();
