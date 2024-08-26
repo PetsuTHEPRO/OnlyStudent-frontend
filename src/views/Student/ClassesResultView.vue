@@ -5,7 +5,7 @@ import Classes from "@/components/ClassesResult.vue";
 </script>
 
 <template>
-  <div class="container-fluid d-flex classes-view p-0">
+  <div class="container-fluid d-flex classes-view p-0" :class="theme">
       <SideBar />
       <div class="container-fluid margin-mobile p-0">
       <MenuBar :role="getRole()" />
@@ -36,8 +36,18 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap");
 
 .classes-view{
-  background-color: #1A001A;
   min-height: 100vh;
+}
+
+.light-theme {
+  background-color: #F5F5F7;
+  color: #121214;
+}
+
+/* Tema dark */
+.dark-theme {
+  background-color: #121214;
+  color: #F5F5F7;
 }
 
 /* Media query para dispositivos móveis */

@@ -4,11 +4,7 @@ import CardClass from "@/components/classroom/ClassroomCard.vue";
 
 <template>
   <!-- Main content -->
-  <div class="flex-grow-1 p-4">
-    <div class="mb-4 d-flex align-items-center justify-content-between">
-      <h1 class="h3">Classes</h1>
-      <button v-if="role === 'educator'" @click="createClassroom" class="btn btn-solicitar text-white">Cadastrar turma</button>
-    </div>
+  <div class="flex-grow-1 px-4">
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
       <!-- Example card item -->
@@ -100,14 +96,6 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap");
-
-.btn-solicitar {
-  background-color: #28a745;  
-}
-
-.btn-solicitar:hover {
-  background-color: #218838;
-}
 
 body {
   margin: 0;

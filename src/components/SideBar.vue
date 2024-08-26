@@ -57,9 +57,10 @@ export default {
 </script>
 
 <style scoped>
+
 .sidebar {
   width: 200px;
-  background-color: #343a40;
+  background-color: #1D1D21;
   color: white;
   transition: width 0.3s ease-in-out;
   z-index: 1000;

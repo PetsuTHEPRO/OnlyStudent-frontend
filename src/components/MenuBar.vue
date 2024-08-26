@@ -23,7 +23,9 @@ import SearchBar from "@/components/SearchBar.vue";
         R$ {{ saldo }}
       </span>
       <button
-        class="bi bi-bell-fill rounded-circle mx-4 text-white notificati"
+        class="rounded-circle mx-4 text-white notificati"
+        :class="[themeClass]"
+        @click="toggleTheme()"
       ></button>
       <button class="btn btn-outline-light rounded-circle p-0">
         <img
@@ -53,12 +55,17 @@ export default {
       saldo: 0,
       name: CookiesService.getName(),
       search: "",
+      themeClass: CookiesService.getTheme() === 'dark-theme' ? 'bi bi-moon' : 'bi bi-sun',
     };
   },
   methods: {
     openMenu() {
       store.state.isSidebarOpen = !store.state.isSidebarOpen;
       console.log(store.state.isSidebarOpen);
+    },
+    toggleTheme() {
+      CookiesService.toggleTheme();
+      this.$router.go();
     },
   },
 };

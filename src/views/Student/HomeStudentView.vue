@@ -5,7 +5,7 @@ import MenuBar from "@/components/MenuBar.vue";
 </script>
 
 <template>
-  <div class="container-fluid d-flex student-home-view p-0">
+  <div class="container-fluid d-flex student-home-view p-0" :class="theme">
     <SideBar />
     <div class="container-fluid margin-mobile p-0">
       <MenuBar role="Estudante" />
@@ -69,6 +69,7 @@ export default {
       student: cookiesService.getName(),
       classrooms: [],
       classroomsDestaque: [],
+      theme: cookiesService.getTheme(),
     };
   },
   mounted() {
@@ -104,8 +105,17 @@ export default {
 
 <style scoped>
 .student-home-view {
-  background-color: #1a001a;
-  color: white;
   min-height: 100vh;
+}
+
+.light-theme {
+  background-color: #F5F5F7;
+  color: #121214;
+}
+
+/* Tema dark */
+.dark-theme {
+  background-color: #121214;
+  color: #F5F5F7;
 }
 </style>
