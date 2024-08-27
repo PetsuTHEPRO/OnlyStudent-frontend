@@ -106,7 +106,7 @@
 import notificationService from "@/service/notificationService.js";
 import CookiesService from "@/service/CookiesService.js";
 import axios from "@/api/axios.js";
-import StorageService from "@/service/StorageService.js";
+import StorageService from "@/service/storage.js";
 
 export default {
   data() {
