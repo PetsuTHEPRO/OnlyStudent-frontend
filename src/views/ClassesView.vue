@@ -30,7 +30,6 @@ import Classes from "@/components/classroom/ClassroomList.vue";
 import CookiesService from "@/service/CookiesService.js";
 
 export default {
-  name: "SupportView",
   data() {
     return {
       role: CookiesService.getRole(),

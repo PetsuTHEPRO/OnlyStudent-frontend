@@ -66,6 +66,7 @@ import cookiesService from "@/service/CookiesService.js";
 export default {
   data() {
     return {
+      theme: cookiesService.getTheme(),
       student: cookiesService.getName(),
       classrooms: [],
       classroomsDestaque: [],
@@ -109,7 +110,7 @@ export default {
 }
 
 .light-theme {
-  background-color: #F5F5F7;
+  background-color: #FFF;
   color: #121214;
 }
 

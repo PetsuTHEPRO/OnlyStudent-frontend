@@ -3,19 +3,19 @@ import StatusModal from "@/components/modal/StatusTurmaModal.vue";
 import ConfirmarEntradaModal from "@/components/modal/ConfirmarEntradaModal.vue";
 </script>
 <template>
-  <div class="card bg-card text-white">
+  <div class="card" :class="theme">
     <div class="card-header d-flex justify-content-between">
       <h5 class="card-title mb-0 text-ellipsis">{{ classroom.name }}</h5>
       <span class="badge" :class="statusColor">{{ classroom.status }}</span>
     </div>
     <div class="card-body">
-      <p class="card-text text-white">
+      <p class="card-text">
         Código da Turma: {{ classroom.codigo }}
       </p>
-      <p class="card-text text-white">
+      <p class="card-text">
         Quantidade Materiais: {{ classroom.totalMateriais }}
       </p>
-      <p class="card-text text-white">Alunos: {{ classroom.totalAlunos }}</p>
+      <p class="card-text">Alunos: {{ classroom.totalAlunos }}</p>
     </div>
     <div class="card-footer d-flex justify-content-between">
       <!-- Botão de Visualizar (disponível para ambos Educator e Student) -->
@@ -105,6 +105,7 @@ export default {
       hasJoined: false,
       showModalConfirm: false,
       classrooms: [],
+      theme: Cookies.getTheme(),
       alunosIds: [],
       showModal: false, // Controla a visibilidade do modal
     };
@@ -149,9 +150,6 @@ export default {
 </script>
 
 <style scoped>
-.bg-card {
-  background-color: #1a1a1e;
-}
 
 .bg-ativa {
   border: 1px solid #29e0a9;
@@ -173,15 +171,15 @@ export default {
   font-weight: 700;
 }
 
-.card {
+.dark-theme .card {
   border: 1px solid #7d1479;
 }
 
-.card-footer {
+.dark-theme .card-footer {
   border-top: 1px solid #7d1479;
 }
 
-.card-body {
+.dark-theme .card-body {
   border-top: 1px solid #7d1479;
 }
 
@@ -189,5 +187,9 @@ export default {
   overflow: hidden; /* Esconde o texto que não cabe */
   white-space: nowrap; /* Impede que o texto quebre para uma nova linha */
   text-overflow: ellipsis; /* Adiciona "..." no final do texto cortado */
+}
+
+.light-theme .card{
+  color: #1a1a1e !important;
 }
 </style>

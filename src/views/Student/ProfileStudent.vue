@@ -6,16 +6,14 @@ import SideBar from "@/components/SideBar.vue";
 
 <template>
   <div class="container-fluid d-flex student-profile-view p-0" :class="theme">
-        <SideBar />
-        <div class="container-fluid margin-mobile p-0">
-
-        <MenuBar role="Estudante" />
-          <header
-            class="d-flex align-items-center justify-content-between"
-          ></header>
-          <CardProfile />
-          </div>
+    <SideBar />
+    <div class="container-fluid p-0">
+      <MenuBar role="Estudante" />
+      <div class="student-profile-form">
+        <CardProfile />
       </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -35,13 +33,23 @@ export default {
 }
 
 .light-theme {
-  background-color: #F5F5F7;
+  background-color: #FFF;
   color: #121214;
 }
 
 /* Tema dark */
 .dark-theme {
   background-color: #121214;
-  color: #F5F5F7;
+  color: #f5f5f7;
+}
+
+.student-profile-form {
+  padding: 0 15rem !important;
+}
+
+@media (max-width: 768px) {
+  .student-profile-form {
+    padding: 0 2rem !important;
+  }
 }
 </style>

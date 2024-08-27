@@ -20,7 +20,7 @@ const StorageService = {
     },
   
     // Limpa os dados do storage
-    clearUserData() {
+    clearAll() {
       localStorage.removeItem('userSpecialty');
       localStorage.removeItem('userPhone');
     },

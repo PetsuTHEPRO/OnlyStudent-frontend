@@ -2,7 +2,7 @@
   <div class="flex-1 px-2">
     <div class="mb-4">
 
-      <div class="card">
+      <div class="card" :class="theme">
         <div class="card-header">
           <div class="d-flex align-items-center gap-3">
             <div class="avatar">
@@ -20,8 +20,8 @@
               />
             </div>
             <div>
-              <h3 class="h5 fw-semibold text-white">{{ user.name }}</h3>
-              <p class="text-white">{{ user.login }}</p>
+              <h3 class="h5 fw-semibold">{{ user.name }}</h3>
+              <p>{{ user.login }}</p>
             </div>
           </div>
         </div>
@@ -112,6 +112,7 @@ export default {
   data() {
     return {
       isEditing: false,
+      theme: CookiesService.getTheme(),
       user: {
         name: CookiesService.getName(),
         telefone: StorageService.getPhone(),
@@ -200,28 +201,52 @@ export default {
 
 <style>
 
-.card{
-  background-color: #1A1A1E;
-  color: white;
+.dark-theme .card {
   border: 1px solid #7D1479;
 }
 
-.card-header{
+.dark-theme .card-header {
   border-bottom: 1px solid #7D1479;
 }
 
-.card-footer{
+.dark-theme .card-footer {
   border-top: 1px solid #7D1479;
 }
 
-.form-control, select {
+.light-theme .card-header{
+  background-color: #FAFAFA;
+}
+
+.light-theme .card-footer{
+  background-color: #FAFAFA;
+}
+
+.dark-theme .form-control, select {
   background-color: #323232 !important;
+  border: 2px solid #DEE2E6 !important;
+  color: white !important;
+}
+
+.dark-theme .form-control, select {
+  background-color: #F8F9FA  !important;
   border: 2px solid #DEE2E6 !important;
   color: white !important;
 }
 
 .form-control:disabled, select:disabled {
   color: #808080 !important;
+}
+
+.light-theme {
+  background-color: #FFF;
+  color: #121214;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07), 0 2px 2px rgba(0, 0, 0, 0.06);
+}
+
+/* Tema dark */
+.dark-theme {
+  background-color: #121214;
+  color: #f5f5f7;
 }
 
 </style>
