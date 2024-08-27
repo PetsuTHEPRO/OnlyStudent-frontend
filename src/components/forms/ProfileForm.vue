@@ -114,8 +114,8 @@ export default {
       isEditing: false,
       user: {
         name: Cookies.getName(),
-        telefone: StorageService.getTelephone(),
-        especialidade: StorageService.getSpecialty(), 
+        telefone: StorageService.getPhone(),
+        especialidade: StorageService.getSpecialty(),
         login: Cookies.getEmail(),
       },
       role: CookiesService.getRole(),

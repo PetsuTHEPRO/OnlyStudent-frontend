@@ -111,12 +111,15 @@ export default {
       axios
         .loginUser(this.user)
         .then((response) => {
+          console.log(response.data);
           // Handle successful login response
-          const { token, email, role, name, id } = response.data;
+          const { token, email, role, telephone, especialidade, name, id } = response.data;
 
           this.login({
             token: token,
             email: email,
+            especialidade: telephone,
+            telefone: especialidade,
             role: role,
             name: name,
             id: id,
