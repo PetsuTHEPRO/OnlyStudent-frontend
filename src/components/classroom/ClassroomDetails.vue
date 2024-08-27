@@ -109,6 +109,7 @@ import MaterialIcon from "@/components/MaterialIcon.vue";
           <!-- Modal Component -->
           <Modal
             :visible="showModal"
+            :codigoTurma="classroom.codigo"
             @close="showModal = false"
             @submit="addMaterial"
           >
