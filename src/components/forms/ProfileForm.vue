@@ -169,13 +169,16 @@ export default {
       // Make a request to the backend API to verify the login credentials
       axios
         .updateUser(this.user, this.role)
-        .then(() => {
+        .then((response) => {
+          console.log(response);
           // Handle successful update response
           notificationService.success(
             "Dados do usuário atualizados com sucesso!"
           );
 
           CookiesService.setName(this.user.name);
+          StorageService.setPhone(this.user.telefone);
+          StorageService.setSpecialty(this.user.especialidade);
         })
         .catch((error) => {
           if (error.response) {

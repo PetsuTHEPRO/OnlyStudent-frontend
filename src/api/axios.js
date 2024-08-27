@@ -87,7 +87,9 @@ export default {
       {
         name: user.name,
         telefone: user.telefone,
-        especialidade: user.especialidade,
+        especialidade: user.especialidade
+      },
+      {
         headers: {
           Authorization: `Bearer ${token}`, // Adiciona o token no cabeçalho de autorização
         },
