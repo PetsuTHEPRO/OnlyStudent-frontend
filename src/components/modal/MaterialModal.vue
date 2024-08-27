@@ -84,10 +84,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    codigoTurma: {
-      type: Number,
-      required: true,
-    }
   },
   data() {
     return {
@@ -95,6 +91,7 @@ export default {
         name: '',
         tipo: '',
         url: '',
+        codigoTurma: ''
       },
     };
   },
@@ -104,7 +101,6 @@ export default {
     },
     submitMaterial() {
       // Emitir os dados do material para o componente pai
-      console.log(this.materialData + " = " + this.codigoTurma);
       this.$emit('submit', { ...this.materialData });
 
       // Limpar os campos e fechar o modal

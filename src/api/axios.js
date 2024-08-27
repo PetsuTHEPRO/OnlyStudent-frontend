@@ -195,6 +195,7 @@ export default {
   },
 
   setMaterialsByClassroomCode(materials) {
+    const token = CookiesService.getToken();
     return apiClient.post(`/material/register`, materials, {
       headers: { Authorization: `Bearer ${token}` },
     });

@@ -156,6 +156,7 @@ export default {
     },
     addMaterial(material) {
       material.turmaCodigo = this.classroom.codigo;
+      console.log(this.classroom.codigo);
       console.log("Material recebido:", material);
       axios
         .setMaterialsByClassroomCode(material)
