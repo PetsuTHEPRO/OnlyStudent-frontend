@@ -113,10 +113,10 @@ export default {
     return {
       isEditing: false,
       user: {
-        name: Cookies.getName(),
+        name: CookiesService.getName(),
         telefone: StorageService.getPhone(),
         especialidade: StorageService.getSpecialty(),
-        login: Cookies.getEmail(),
+        login: CookiesService.getEmail(),
       },
       role: CookiesService.getRole(),
     };
