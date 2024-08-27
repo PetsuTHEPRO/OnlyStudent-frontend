@@ -16,7 +16,7 @@
                   border-radius: 50%;
                   border: 1px solid black;
                 "
-                src="https://robohash.org/profile"
+                :src="`https://robohash.org/${user.name}`"
               />
             </div>
             <div>
