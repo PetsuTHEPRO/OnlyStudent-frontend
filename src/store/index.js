@@ -36,12 +36,12 @@ const store = createStore({
     },
     setEspecialidade(state, especialidade){
       state.especialidade = especialidade
-      StorageService.setEspecialidade(especialidade)
+      StorageService.setSpecialty(especialidade)
     },
 
     setTelefone(state, telefone){
       state.telefone = telefone
-      StorageService.setTelefone(telefone)
+      StorageService.setPhone(telefone)
     },
     SetId(state, id){
       state.id = id

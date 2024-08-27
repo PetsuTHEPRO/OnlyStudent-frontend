@@ -126,7 +126,7 @@ export default {
           });
           notificationService.success("Bem vindo!");
           this.$router.push({
-            name: role === "student" ? "student" : "educator",
+            name: role,
           });
           this.isLoading = false;
           this.isDisabled = false;
@@ -135,7 +135,7 @@ export default {
           // Handle login error response
           if (error) {
             // O servidor respondeu com um status fora do intervalo 2xx
-            notificationService.error(error.response.data);
+            notificationService.error(error.response);
             console.log(error);
           } else {
             notificationService.error(
