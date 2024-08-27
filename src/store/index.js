@@ -1,11 +1,14 @@
 import { createStore } from 'vuex'
-import Cookies from '../service/CookiesService'
+import Cookies from '@/service/CookiesService'
+import StorageService from '@/service/storage';
 
 const store = createStore({
   state: {
     authToken: Cookies.getToken() || '',
     userRole: Cookies.getRole() || '',
     email: Cookies.getEmail() || '',
+    especialidade: StorageService.getEspecialidade() || '',
+    telefone: StorageService.getTelefone() || '',
     name: Cookies.getName() || '',
     id: Cookies.getId() || '',
     isSidebarOpen: false,
@@ -31,6 +34,15 @@ const store = createStore({
       state.name = name
       Cookies.setName(name)
     },
+    setEspecialidade(state, especialidade){
+      state.especialidade = especialidade
+      StorageService.setEspecialidade(especialidade)
+    },
+
+    setTelefone(state, telefone){
+      state.telefone = telefone
+      StorageService.setTelefone(telefone)
+    },
     SetId(state, id){
       state.id = id
       Cookies.setId(id)
@@ -40,14 +52,19 @@ const store = createStore({
       state.email = ''
       state.userRole = ''
       state.name = ''
+      state.especialidade = ''
+      state.telefone = ''
       state.id = ''
       Cookies.clearAll()
+      StorageService.clearAll()
     }
   },
   actions: {
-    login({ commit }, { token, role, name, email, id }) {
+    login({ commit }, { token, role, name, especialidade, telefone, email, id }) {
       commit('SetId', id)
       commit('setAuthToken', token)
+      commit('setEspecialidade', especialidade)
+      commit('setTelefone', telefone)
       commit('setUserRole', role)
       commit('setName', name)
       commit('setEmail', email)
@@ -64,6 +81,8 @@ const store = createStore({
     userRole: state => state.userRole,
     email: state => state.email,
     name: state => state.name,
+    especialidade: state => state.especialidade,
+    telefone: state => state.telefone,
     id: state => state.id,
     isMenuOpen: state => state.isSidebarOpen,
   }

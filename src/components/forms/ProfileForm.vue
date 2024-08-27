@@ -106,12 +106,18 @@
 import notificationService from "@/service/notificationService.js";
 import CookiesService from "@/service/CookiesService.js";
 import axios from "@/api/axios.js";
+import StorageService from "@/service/StorageService.js";
 
 export default {
   data() {
     return {
       isEditing: false,
-      user: {},
+      user: {
+        name: Cookies.getName(),
+        telefone: StorageService.getTelephone(),
+        especialidade: StorageService.getSpecialty(), 
+        login: Cookies.getEmail(),
+      },
       role: CookiesService.getRole(),
     };
   },
