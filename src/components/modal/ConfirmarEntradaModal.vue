@@ -70,14 +70,20 @@
   </script>
   
   <style scoped>
-  .modal-content {
-    background-color: #1a001a;
-  }
-  .modal-backdrop {
-    z-index: 1040;
-  }
-  .modal-dialog {
-    z-index: 1050;
-  }
+.modal-content {
+  background-color: #1a001a;
+}
+
+.modal-backdrop {
+  z-index: 1040;
+}
+
+.modal-dialog {
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
   </style>
   
