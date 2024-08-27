@@ -20,6 +20,7 @@ export default {
       },
     });
   },
+
   getAllClassrooms(search, page, size) {
     const token = CookiesService.getToken();
     return apiClient.get("/turma/allClassroom", {
@@ -59,6 +60,7 @@ export default {
       },
     });
   },
+
   getClassroomsDestaque() {
     const token = CookiesService.getToken();
     return apiClient.get("/turma/destaque", {
@@ -109,6 +111,14 @@ export default {
   },
 
   // Comando POST - Banco de Dados
+
+  confirmarEntradaTurma(codigo, idAluno){
+    const token = CookiesService.getToken();    
+    return apiClient.post(`/turma/${codigo}/entrar`,
+    { idAluno: idAluno },
+    { headers: { Authorization: `Bearer ${token}` } }
+    );
+  },
 
   createClassroom(classroomData) {
     const token = CookiesService.getToken();

@@ -1,5 +1,6 @@
 <script setup>
-import StatusModal from "@/components/StatusTurmaModal.vue";
+import StatusModal from "@/components/modal/StatusTurmaModal.vue";
+import ConfirmarEntradaModal from "@/components/modal/ConfirmarEntradaModal.vue";
 </script>
 <template>
   <div class="card bg-card text-white">
@@ -47,9 +48,10 @@ import StatusModal from "@/components/StatusTurmaModal.vue";
             'rounded-circle',
             (hasJoined && userRole === 'student')? 'btn-secondary' : 'btn-outline-light',
           ]"
+          @click="showModalConfirm = true"
           :disabled="hasJoined"
         >
-          <i class="bi bi-person-plus" style="font-size: 1.2rem"></i>
+          <i class="bi bi-door-open" style="font-size: 1.2rem"></i>
           <span class="visually-hidden">Entrar</span>
         </button>
       </template>
@@ -64,6 +66,14 @@ import StatusModal from "@/components/StatusTurmaModal.vue";
       >
       <template #title>Configuração Turma</template>
     </StatusModal>
+
+    <ConfirmarEntradaModal
+      :visible="showModalConfirm"
+      :turmaNome="classroom.name"
+      :turmaCodigo="classroom.codigo"
+      :idAluno="idUser"
+      @close="showModalConfirm = false"
+    />
   </div>
 </template>
 
@@ -90,8 +100,10 @@ export default {
   },
   data() {
     return {
+      idUser: Cookies.getId(),
       userRole: Cookies.getRole(),
       hasJoined: false,
+      showModalConfirm: false,
       classrooms: [],
       alunosIds: [],
       showModal: false, // Controla a visibilidade do modal

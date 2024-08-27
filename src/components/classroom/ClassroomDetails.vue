@@ -1,5 +1,5 @@
 <script setup>
-import Modal from "@/components/MaterialModal.vue";
+import Modal from "@/components/modal/MaterialModal.vue";
 import MaterialIcon from "@/components/MaterialIcon.vue";
 </script>
 
