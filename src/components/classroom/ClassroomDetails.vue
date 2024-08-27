@@ -123,11 +123,13 @@ import MaterialIcon from "@/components/MaterialIcon.vue";
 <script>
 import axios from "@/api/axios.js";
 import notificationService from "@/service/notificationService.js";
+import CookiesService from "@/service/CookiesService";
 
 export default {
   data() {
     return {
       classroom: [],
+      userRole: CookiesService.getRole(),
       showModal: false, // Controla a visibilidade do modal
       activeTab: "students",
       error: false,
