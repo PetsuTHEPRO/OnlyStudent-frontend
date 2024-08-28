@@ -4,7 +4,7 @@ import CardClass from "@/components/classroom/ClassroomCard.vue";
 
 <template>
   <!-- Main content -->
-  <div class="flex-grow-1 p-4">
+  <div class="p-4 classesAll-view " :class="theme">
     <div class="mb-4 d-flex align-items-center justify-content-between">
       <h1 class="h3">Classes disponíveis</h1>
     </div>
@@ -49,6 +49,7 @@ import CardClass from "@/components/classroom/ClassroomCard.vue";
 
 <script>
 import axios from "@/api/axios.js";
+import cookieService from "@/service/CookiesService.js";
 
 export default {
   data() {
@@ -60,7 +61,7 @@ export default {
       currentPage: 0,
       totalPages: 1,
       pageSize: 12,
-      
+      theme: cookieService.getTheme(),      
     };
   },
   mounted() {
@@ -94,6 +95,10 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap");
 
+.classesAll-view{
+  min-height: 100vh;
+}
+
 .btn-solicitar {
   background-color: #28a745;  
 }
@@ -102,16 +107,4 @@ export default {
   background-color: #218838;
 }
 
-body {
-  margin: 0;
-}
-h1,
-h2,
-h5 {
-  color: white;
-}
-
-.bg-educator {
-  background-color: #121214 !important;
-}
 </style>

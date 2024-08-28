@@ -85,5 +85,9 @@
   justify-content: center;
   min-height: 100vh;
 }
+
+strong{
+  color: white;
+}
   </style>
   

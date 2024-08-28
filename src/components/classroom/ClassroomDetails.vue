@@ -102,7 +102,7 @@ import MaterialIcon from "@/components/MaterialIcon.vue";
                 <!-- Utiliza o componente MaterialIcon -->
                 <MaterialIcon :tipo="material.tipo" />
                 <a class="ms-2 text-decoration-none" target="_blank" :href="material.url.startsWith('http://') || material.url.startsWith('https://') ? material.url : 'https://' + material.url">{{ material.name }}</a>
-                <button class="btn btn-danger btn-sm ms-auto" @click="deleteMaterial(material.id)">Apagar</button>
+                <button v-if="userRole === 'educator'" class="btn btn-danger btn-sm ms-auto" @click="deleteMaterial(material.id)">Apagar</button>
               </li>
             </template>
           </ul>

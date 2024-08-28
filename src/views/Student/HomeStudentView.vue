@@ -33,7 +33,15 @@ import MenuBar from "@/components/MenuBar.vue";
           </div>
         </section>
         <section class="m-4">
-          <h2 class="h4 fw-semibold mb-3">Destaques</h2>
+          <div class="d-flex justify-content-between align-items-center w-100 px-4 mb-3">
+            <h2 class="h4 fw-semibold">Destaques</h2>
+            <span
+              @click="$router.push({ name: 'allClassrooms' })"
+              class="btn-ver-tudo"
+            >
+              Ver tudo <span class="icon">&gt;</span>
+          </span>
+          </div>
           <div class="row g-3">
             <span v-if="classroomsDestaque.length === 0"
               >Não há turma em destaque.</span
@@ -105,18 +113,44 @@ export default {
 </script>
 
 <style scoped>
+
+.btn-ver-tudo {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #007bff;
+  background-color: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-ver-tudo .icon {
+  margin-left: 2px;
+  transition: transform 0.3s ease;
+}
+
+.btn-ver-tudo:hover {
+  color: #0056b3;
+}
+
+.btn-ver-tudo:hover .icon {
+  transform: translateX(5px);
+}
+
 .student-home-view {
   min-height: 100vh;
 }
 
 .light-theme {
-  background-color: #FFF;
+  background-color: #fff;
   color: #121214;
 }
 
 /* Tema dark */
 .dark-theme {
   background-color: #121214;
-  color: #F5F5F7;
+  color: #f5f5f7;
 }
 </style>

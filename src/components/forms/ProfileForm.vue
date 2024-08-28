@@ -1,6 +1,6 @@
 <template>
   <div class="flex-1 px-2">
-    <div class="mb-4">
+    <div class="my-4">
 
       <div class="card" :class="theme">
         <div class="card-header">
@@ -239,8 +239,8 @@ export default {
 }
 
 .dark-theme .form-control:disabled, select:disabled {
-  background-color: #323232 ;
-  color: #808080;
+  background-color: #323232;
+  color: #808080 !important;
 }
 
 .light-theme {

@@ -5,7 +5,7 @@ import SearchBar from "@/components/SearchBar.vue";
 
 <template>
   <header
-    class="d-flex align-items-center justify-content-between bg-black px-4 py-2 mb-5 border-bottom border-top border-2 border-purple"
+    class="d-flex align-items-center justify-content-between bg-black px-4 py-2 border-bottom border-top border-2 border-purple"
   >
     <div class="d-flex align-items-center">
       <SidebarMobile />
