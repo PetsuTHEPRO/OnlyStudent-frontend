@@ -135,7 +135,7 @@ export default {
           // Handle login error response
           if (error) {
             // O servidor respondeu com um status fora do intervalo 2xx
-            notificationService.error(error.response);
+            notificationService.error("Login ou Senha incorreto.");
             console.log(error);
             this.isLoading = false;
             this.isDisabled = false;
