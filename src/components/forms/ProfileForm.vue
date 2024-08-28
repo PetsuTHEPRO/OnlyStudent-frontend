@@ -70,7 +70,7 @@
             <label for="specialty" class="form-label">Especialidade</label>
             <select
               id="especialidade"
-              class="d-block w-100 px-3 py-2 border border-2 rounded input-campo"
+              class="d-block w-100 px-3 py-2 border border-2 rounded"
               v-model="user.especialidade"
               :disabled="!isEditing"
             >
@@ -227,14 +227,20 @@ export default {
   color: white !important;
 }
 
-.dark-theme .form-control, select {
-  background-color: #F8F9FA  !important;
-  border: 2px solid #DEE2E6 !important;
-  color: white !important;
+.light-theme .form-control, select {
+  background-color: #FFF;
+  border: 2px solid #DEE2E6 ;
+  color: black;
 }
 
-.form-control:disabled, select:disabled {
-  color: #808080 !important;
+.light-theme .form-control:disabled, select:disabled {
+  background-color: #F8F9FA ;
+  color: #808080;
+}
+
+.dark-theme .form-control:disabled, select:disabled {
+  background-color: #323232 ;
+  color: #808080;
 }
 
 .light-theme {

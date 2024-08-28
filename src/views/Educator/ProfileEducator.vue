@@ -10,7 +10,9 @@ import SideBar from "@/components/SideBar.vue";
     <div class="container-fluid margin-mobile p-0">
     <MenuBar role="Professor" />
     <header class="d-flex align-items-center justify-content-between"></header>
-    <ProfileForm />
+    <div class="educator-profile-form">
+      <ProfileForm />
+    </div>
   </div>
   </div>
 </template>
@@ -44,12 +46,14 @@ export default {
   color: #F5F5F7;
 }
 
+.educator-profile-form {
+  padding: 0 15rem !important;
+}
 
-/* Media query para dispositivos móveis */
 @media (max-width: 768px) {
+  .educator-profile-form {
+    padding: 0 2rem !important;
+  }
+}
 
-.max-vw-100{
-  width: calc(100vw - 80px);
-}
-}
 </style>

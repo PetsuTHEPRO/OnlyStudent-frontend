@@ -6,7 +6,7 @@ import SideBar from "@/components/SideBar.vue";
 <template>
   <div class="container-fluid d-flex educator-create-view p-0" :class="theme">
     <SideBar />
-    <div class="container-fluid margin-mobile p-0">
+    <div class="container-fluid p-0">
     <MenuBar role="Professor" />
     <div class="mx-5 d-flex flex-column align-items-center">
       <h1>Cadastrar Turma</h1>
@@ -107,21 +107,21 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap");
 
-.educator-create-view{
+.educator-create-view {
+  background-color: #121214 !important;
+  color: white;
   min-height: 100vh;
 }
 
-.light-theme {
-  background-color: #F5F5F7;
-  color: #121214;
-}
-
-/* Tema dark */
-.dark-theme {
-  background-color: #121214;
+.dark-theme{
+  background-color: #121214 !important;
   color: #F5F5F7;
 }
 
+.light-theme{
+  background-color: #F5F5F7;
+  color: #121214;
+}
 
 .rounded {
   border-radius: 10px !important;
@@ -129,11 +129,6 @@ export default {
 
 .min-h-screen {
   min-height: 100vh;
-}
-
-.bg-purple {
-  background-color: #131212 !important;
-  border-right: 2px solid #424141 !important;
 }
 
 input,

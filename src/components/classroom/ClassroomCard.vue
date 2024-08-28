@@ -9,9 +9,7 @@ import ConfirmarEntradaModal from "@/components/modal/ConfirmarEntradaModal.vue"
       <span class="badge" :class="statusColor">{{ classroom.status }}</span>
     </div>
     <div class="card-body">
-      <p class="card-text">
-        Código da Turma: {{ classroom.codigo }}
-      </p>
+      <p class="card-text">Educator da Turma: {{ classroom.educator }}</p>
       <p class="card-text">
         Quantidade Materiais: {{ classroom.totalMateriais }}
       </p>
@@ -21,20 +19,35 @@ import ConfirmarEntradaModal from "@/components/modal/ConfirmarEntradaModal.vue"
       <!-- Botão de Visualizar (disponível para ambos Educator e Student) -->
       <button
         @click="viewClassroom(classroom.codigo)"
-        :class="['btn rounded-circle', ((!hasJoined && userRole === 'student') || userRole !== 'educator')? 'btn-secondary' : 'btn-outline-light']"
-        :disabled="(!hasJoined && userRole === 'student') || userRole !== 'educator'"
+        :class="[
+          'btn rounded-circle',
+          !hasJoined && userRole === 'student' && userRole !== 'educator'
+            ? 'btn-secondary'
+            : `btn-${theme}`,
+        ]"
+        :disabled="
+          !hasJoined && userRole === 'student' && userRole !== 'educator'
+        "
       >
         <i class="bi bi-eye" style="font-size: 1.2rem"></i>
         <span class="visually-hidden">Visualizar</span>
-    </button>
+      </button>
 
       <!-- Botões específicos para Educator -->
       <template v-if="userRole === 'educator'">
-        <button class="btn btn-outline-light rounded-circle" @click="showModal = true">
+        <button
+          class="btn rounded-circle"
+          :class="`btn-${theme}`"
+          @click="showModal = true"
+        >
           <i class="bi bi-gear" style="font-size: 1.2rem"></i>
           <span class="visually-hidden">Configurações</span>
         </button>
-        <button class="btn btn-outline-light rounded-circle" @click="deleteClass">
+        <button
+          class="btn rounded-circle"
+          :class="`btn-${theme}`"
+          @click="deleteClass"
+        >
           <i class="bi bi-trash" style="font-size: 1.2rem"></i>
           <span class="visually-hidden">Deletar</span>
         </button>
@@ -46,7 +59,9 @@ import ConfirmarEntradaModal from "@/components/modal/ConfirmarEntradaModal.vue"
           :class="[
             'btn',
             'rounded-circle',
-            (hasJoined && userRole === 'student')? 'btn-secondary' : 'btn-outline-light',
+            hasJoined && userRole === 'student'
+              ? 'btn-secondary'
+              : 'btn-outline-light',
           ]"
           @click="showModalConfirm = true"
           :disabled="hasJoined"
@@ -59,11 +74,11 @@ import ConfirmarEntradaModal from "@/components/modal/ConfirmarEntradaModal.vue"
 
     <!-- Modal Component -->
     <StatusModal
-        :visible="showModal"
-        :idTurma="classroom.codigo"
-        @close="showModal = false"
-        @submit="addMaterial"
-      >
+      :visible="showModal"
+      :idTurma="classroom.codigo"
+      @close="showModal = false"
+      @submit="addMaterial"
+    >
       <template #title>Configuração Turma</template>
     </StatusModal>
 
@@ -96,7 +111,7 @@ export default {
     student: {
       type: Object,
       required: false,
-    }
+    },
   },
   data() {
     return {
@@ -111,38 +126,40 @@ export default {
     };
   },
   mounted() {
-
     Axios.getClassroomsHomeByCode(Cookies.getId())
-    .then((response) => {
-      this.classrooms = response.data;
-      for (let i = 0; i < this.classrooms.length; i++) {
-        if (this.classrooms[i].codigo === this.classroom.codigo) {
-          this.hasJoined = true; // Se encontrar, retorna verdadeiro
+      .then((response) => {
+        this.classrooms = response.data;
+        for (let i = 0; i < this.classrooms.length; i++) {
+          if (this.classrooms[i].codigo === this.classroom.codigo) {
+            this.hasJoined = true; // Se encontrar, retorna verdadeiro
+          }
         }
-      }
-    }).catch((error) => {
-      console.log(error);
-    });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   methods: {
-      deleteClass() {
-      Axios.deleteClassroom(this.classroom.codigo).then((response) => {
-        if (response.status === 204) {
-          this.$router.push({ name: "educatorClasses" });
-          NotificationService.success("Turma deletada com sucesso!");
-          // Atualize a lista de turmas ou redirecione o usuário
-        }
-      }).catch((error) => {
-        console.log(error);
-        NotificationService.error("Erro ao deletar turma!");
-      })
+    deleteClass() {
+      Axios.deleteClassroom(this.classroom.codigo)
+        .then((response) => {
+          if (response.status === 204) {
+            NotificationService.success("Turma deletada com sucesso!");
+            // Atualize a lista de turmas ou redirecione o usuário
+            window.location.reload();
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          NotificationService.error("Erro ao deletar turma!");
+        });
     },
 
     viewClassroom(classroomId) {
       // Retorna o objeto de configuração da rota
       this.$router.push({
         name: `${this.userRole}Classroom`, // Nome da rota baseado no papel do usuário
-        params: { id: classroomId }        // Parâmetros da rota, neste caso o ID da turma
+        params: { id: classroomId }, // Parâmetros da rota, neste caso o ID da turma
       });
     },
   },
@@ -151,19 +168,34 @@ export default {
 
 <style scoped>
 
-.bg-ativa {
+.dark-theme .bg-ativa {
   border: 1px solid #29e0a9;
   color: #29e0a9;
 }
 
-.bg-bloqueada {
+.light-theme .bg-ativa {
+  border: 1px solid #1e8f61;
+  color: #1e8f61;
+}
+
+.dark-theme .bg-bloqueada {
   border: 1px solid #ffcd1e;
   color: #ffcd1e;
 }
 
-.bg-desativada {
+.light-theme .bg-bloqueada {
+  border: 1px solid #d4a017;
+  color: #d4a017;
+}
+
+.dark-theme .bg-desativada {
   border: 1px solid #f44336;
   color: #f44336;
+}
+
+.light-theme .bg-desativada {
+  border: 1px solid #b71c1c;
+  color: #b71c1c;
 }
 
 .card-title {
@@ -189,7 +221,44 @@ export default {
   text-overflow: ellipsis; /* Adiciona "..." no final do texto cortado */
 }
 
-.light-theme .card{
+.light-theme .card {
   color: #1a1a1e !important;
 }
+
+.light-theme {
+  background-color: #FFF;
+  color: #121214;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07), 0 2px 2px rgba(0, 0, 0, 0.06);
+}
+
+/* Tema dark */
+.dark-theme {
+  background-color: #121214;
+  color: #f5f5f7;
+}
+
+.btn-light-theme{
+  color: black;
+  border-color: #080808; /* Cor da borda: branco (claro) */
+  background-color: transparent; /* Fundo transparente */
+}
+
+.btn-dark-theme:hover {
+    color: #212529; /* Cor do texto ao passar o mouse: preto */
+    background-color: #f8f9fa; /* Fundo claro ao passar o mouse */
+    border-color: #f8f9fa; /* Cor da borda: branco (claro) */
+}
+
+.btn-dark-theme{
+  color: white;
+  border-color: #f8f9fa; /* Cor da borda: branco (claro) */
+  background-color: transparent; /* Fundo transparente */
+}
+
+.btn-light-theme:hover {
+    color: #f8f9fa; /* Cor do texto ao passar o mouse: preto */
+    background-color: #212529; /* Fundo claro ao passar o mouse */
+    border-color: #212529; /* Cor da borda: branco (claro) */
+}
+
 </style>

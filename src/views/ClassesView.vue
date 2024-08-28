@@ -14,7 +14,7 @@ import Classes from "@/components/classroom/ClassroomList.vue";
           <h1 class="h3 fw-semibold">Classes</h1>
           <button
           v-if="role === 'educator'"
-          @click="createClassroom"
+          @click="$router.push({ name: 'createClassroom' })"
           class="btn btn-solicitar py-0 text-white"
           >
           Cadastrar turma

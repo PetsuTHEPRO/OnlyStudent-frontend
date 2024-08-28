@@ -91,6 +91,7 @@ export default {
         this.closeModal();
         this.turmaAction = '';
         notificationService.success('Turma atualizada com sucesso!');
+        window.location.reload();
       }).catch((error) => {
         console.log(error);
       })

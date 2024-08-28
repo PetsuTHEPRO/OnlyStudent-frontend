@@ -1,16 +1,16 @@
 <template>
   <div class="d-flex flex-column mx-5 mb-5">
-    <div class="card w-100 max-w-xl bg-card">
+    <div class="card w-100 max-w-xl" :class="theme">
       <div class="card-header d-flex flex-column">
-        <h5 class="card-title text-white">Formulário de Suporte</h5>
-        <p class="card-text text-white">
+        <h5 class="card-title">Formulário de Suporte</h5>
+        <p class="card-text">
           Preencha o formulário abaixo para nos ajudar.
         </p>
       </div>
       <div class="card-body">
         <form @submit.prevent="submitSupportRequest" class="row g-3">
           <div class="col-12">
-            <label for="email" class="form-label text-white">Email pra Contato</label>
+            <label for="email" class="form-label">Email pra Contato</label>
             <input
               v-model="support.email"
               type="email"
@@ -20,7 +20,7 @@
             />
           </div>
           <div class="col-12">
-            <label for="phone" class="form-label text-white">Telefone pra Contato</label>
+            <label for="phone" class="form-label">Telefone pra Contato</label>
             <input
               v-model="support.phone"
               type="tel"
@@ -30,21 +30,21 @@
             />
           </div>
           <div class="col-12">
-            <label for="reason" class="form-label text-white">Razão da Solicitação</label>
-            <select v-model="support.razao" id="reason" class="form-select text-white input-text">
-              <option value="" disabled selected>Select reason</option>
-              <option value="bugs">Bugs e Glitchs</option>
-              <option value="payment">Falhas no Pagamento</option>
-              <option value="suggestions">Sugestões</option>
-              <option value="access">Problemas de Acesso</option>
-              <option value="functionality">Dúvidas sobre Funcionalidades</option>
-              <option value="security">Questões de Segurança</option>
-              <option value="performance">Problemas de Desempenho</option>
+            <label for="reason" class="form-label">Razão da Solicitação</label>
+            <select v-model="support.razao" id="reason" class="form-select input-text">
+              <option class="option" value="" disabled selected>Select reason</option>
+              <option class="option" value="bugs">Bugs e Glitchs</option>
+              <option class="option" value="payment">Falhas no Pagamento</option>
+              <option class="option" value="suggestions">Sugestões</option>
+              <option class="option" value="access">Problemas de Acesso</option>
+              <option class="option" value="functionality">Dúvidas sobre Funcionalidades</option>
+              <option class="option" value="security">Questões de Segurança</option>
+              <option class="option" value="performance">Problemas de Desempenho</option>
             </select>
           </div>
 
           <div class="col-12">
-            <label for="description" class="form-label text-white">Descrição</label>
+            <label for="description" class="form-label">Descrição</label>
             <textarea
               v-model="support.descricao"
               id="description"
@@ -144,34 +144,51 @@ export default {
 
 <style scoped>
 
-.bg-card {
-  background-color: #1a1a1e;
-}
-
 .card-title {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 700;
 }
 
-.card {
+.dark-theme .card {
+  background-color: #121214;
+  color: #f5f5f7;
   border: 1px solid #7d1479;
 }
 
-.card-footer {
+.light-theme .card {
+  background-color: #FFF;
+  color: #121214;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07), 0 2px 2px rgba(0, 0, 0, 0.06);
+}
+
+.dark-theme .card-footer {
   border-top: 1px solid #7d1479;
 }
 
-.card-body {
+.dark-theme .card-body {
   border-top: 1px solid #7d1479;
 }
 
-.input-text {
-  background-color: #323232 !important;
-  color: #fff !important;
+.dark-theme .input-text {
+  background-color: #323232;
+  color: white;
+}
+
+.light-theme .input-text {
+  background-color: #FFF;
+  color: black;
 }
 
 .input-text::placeholder {
   color: #5e5e5e !important;
+}
+
+.light-theme .option {
+  color: black !important;
+}
+
+.dark-theme .option {
+  color: white !important;
 }
 
 .btn-solicitar {

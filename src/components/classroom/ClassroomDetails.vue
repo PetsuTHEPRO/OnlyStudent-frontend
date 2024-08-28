@@ -4,21 +4,21 @@ import MaterialIcon from "@/components/MaterialIcon.vue";
 </script>
 
 <template>
-  <div class="p-4">
+  <div class="p-4" :class="theme">
     <!-- Verifica se ocorreu um erro -->
     <div v-if="error" class="alert alert-danger" role="alert">
       Turma não encontrada. Error 404
     </div>
     <!-- Verifica se os dados da turma estão disponíveis -->
     <div v-else>
-      <h2 class="h4 fw-bold text-white">{{ classroom.name }}</h2>
-      <p class="small text-white">Instructor: {{ classroom.educator }}</p>
+      <h2 class="h4 fw-bold">{{ classroom.name }}</h2>
+      <p class="small">Instructor: {{ classroom.educator }}</p>
       <div class="my-4 border-top separator"></div>
 
       <ul class="nav nav-tabs separator">
         <li class="nav-item">
           <button
-            class="nav-link text-white"
+            class="nav-link"
             :class="{ active: activeTab === 'students' }"
             @click="setActiveTab('students')"
           >
@@ -27,7 +27,7 @@ import MaterialIcon from "@/components/MaterialIcon.vue";
         </li>
         <li class="nav-item">
           <button
-            class="nav-link text-white"
+            class="nav-link"
             :class="{ active: activeTab === 'about' }"
             @click="setActiveTab('about')"
           >
@@ -36,7 +36,7 @@ import MaterialIcon from "@/components/MaterialIcon.vue";
         </li>
         <li class="nav-item">
           <button
-            class="nav-link text-white"
+            class="nav-link"
             :class="{ active: activeTab === 'materials' }"
             @click="setActiveTab('materials')"
           >
@@ -50,20 +50,20 @@ import MaterialIcon from "@/components/MaterialIcon.vue";
           class="tab-pane fade"
           :class="{ 'show active': activeTab === 'students' }"
         >
-          <h3 class="h6 fw-semibold text-white">Students</h3>
+          <h3 class="h6 fw-semibold">Students</h3>
           <ul class="list-unstyled">
             <!-- Verifica se a lista de alunos está vazia -->
-            <template v-if="classroom.nomeAlunos">
-              <li class="text-muted text-white">No students available</li>
+            <template v-if="!classroom.nomeAlunos">
+              <li class="text-muted">No students available</li>
             </template>
             <template v-else>
               <li
                 v-for="aluno in classroom.nomeAlunos"
                 :key="aluno.id"
-                class="d-flex align-items-center mb-2 text-white"
+                class="d-flex align-items-center mb-2"
               >
-                <i class="bi bi-person me-2 text-white" style="font-size: 1.5rem"></i>
-                <span class="text-white">{{ aluno }}</span>
+                <i class="bi bi-person me-2" style="font-size: 1.5rem"></i>
+                <span>{{ aluno }}</span>
               </li>
             </template>
             
@@ -74,26 +74,25 @@ import MaterialIcon from "@/components/MaterialIcon.vue";
           class="tab-pane fade"
           :class="{ 'show active': activeTab === 'about' }"
         >
-          <h3 class="h6 fw-semibold text-white">About</h3>
-          <p class="text-muted small text-white">{{ classroom.description }}</p>
+          <h3 class="h6 fw-semibold">About</h3>
+          <p class="text-muted small">{{ classroom.description }}</p>
         </div>
 
         <div
           class="tab-pane fade"
           :class="{ 'show active': activeTab === 'materials' }"
         >
-          <div class="d-flex justify-content-between">
-            <h3 class="h6 fw-semibold text-white">Materials</h3>
+          <div class="d-flex justify-content-between mb-4">
+            <h3 class="h6 fw-semibold">Materials</h3>
             <button class="btn btn-primary btn-sm" @click="showModal = true" v-if="userRole === 'educator'">
               Add Material
             </button>
           </div>
           <ul class="list-unstyled">
             <!-- Verifica se a lista de materiais está vazia -->
-            <template v-if="classroom.materiais === null || classroom.materiais === undefined">
-              <li class="text-muted text-white">No materials available</li>
+            <template v-if="classroom.materiais == null || classroom.materiais.length === 0">
+              <li class="text-muted">No materials available</li>
             </template>
-            <!-- Lista os materiais se existirem -->
             <template v-else>
               <li
                 v-for="material in classroom.materiais"
@@ -103,6 +102,7 @@ import MaterialIcon from "@/components/MaterialIcon.vue";
                 <!-- Utiliza o componente MaterialIcon -->
                 <MaterialIcon :tipo="material.tipo" />
                 <a class="ms-2 text-decoration-none" target="_blank" :href="material.url.startsWith('http://') || material.url.startsWith('https://') ? material.url : 'https://' + material.url">{{ material.name }}</a>
+                <button class="btn btn-danger btn-sm ms-auto" @click="deleteMaterial(material.id)">Apagar</button>
               </li>
             </template>
           </ul>
@@ -130,6 +130,7 @@ export default {
   data() {
     return {
       classroom: [],
+      theme: CookiesService.getTheme(),
       userRole: CookiesService.getRole(),
       showModal: false, // Controla a visibilidade do modal
       activeTab: "students",
@@ -161,6 +162,9 @@ export default {
       axios
         .setMaterialsByClassroomCode(material)
         .then((response) => {
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
           notificationService.success("Material adicionado com sucesso!");
           console.log(response.data);
           this.atualizarMaterial();
@@ -170,6 +174,20 @@ export default {
         });
       // Aqui você pode enviar o material para o servidor
     },
+
+    deleteMaterial(materialId) {
+    axios
+      .deleteMaterial(this.classroom.codigo, materialId)
+      .then((response) => {
+        notificationService.success("Material excluído com sucesso!");
+        window.location.reload();
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        notificationService.error("Erro ao excluir material.");
+      });
+  }
 
   },
 };
@@ -192,5 +210,16 @@ export default {
 
 .active{
   background-color: rgba(255, 255, 255, 0) !important;
+}
+
+.light-theme h3{
+  color: black !important;
+}
+.light-theme span{
+  color: black !important;
+}
+
+.light-theme bi{
+  color: black !important;
 }
 </style>

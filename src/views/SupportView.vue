@@ -5,11 +5,13 @@ import CardSuport from "@/components/SupportRequest.vue";
 </script>
 
 <template>
-  <div class="container-fluid d-flex classes-view p-0" :class="theme">
+  <div class="container-fluid d-flex support-view p-0" :class="theme">
     <SideBar />
     <div class="container-fluid p-0">
       <MenuBar :role="getRole()" />
-      <CardSuport />
+      <div class="support-form">
+        <CardSuport />
+      </div>
     </div>
   </div>
 </template>
@@ -36,8 +38,18 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap");
 
-.classes-view {
+.support-view {
   min-height: 100vh;
+}
+
+.support-form {
+  padding: 0 15rem !important;
+}
+
+@media (max-width: 768px) {
+  .support-form {
+    padding: 0 2rem !important;
+  }
 }
 
 .light-theme {

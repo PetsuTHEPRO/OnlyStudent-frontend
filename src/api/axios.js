@@ -136,6 +136,7 @@ export default {
     );
   },
 
+
   registerUser(userData) {
     return apiClient.post("/auth/register", {
       name: userData.name,
@@ -199,6 +200,13 @@ export default {
   setMaterialsByClassroomCode(materials) {
     const token = CookiesService.getToken();
     return apiClient.post(`/material/register`, materials, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+
+  deleteMaterial(classroomCodigo, materialId) {
+    const token = CookiesService.getToken();
+    return apiClient.delete(`/turma/${classroomCodigo}/material/${materialId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   },
