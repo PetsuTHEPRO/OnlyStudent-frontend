@@ -137,6 +137,8 @@ export default {
             // O servidor respondeu com um status fora do intervalo 2xx
             notificationService.error(error.response);
             console.log(error);
+            this.isLoading = false;
+            this.isDisabled = false;
           } else {
             notificationService.error(
               "Servidor Offline, entre em contato a equipe técnica!"
